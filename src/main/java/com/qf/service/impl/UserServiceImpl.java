@@ -18,4 +18,25 @@ public class UserServiceImpl implements UserService {
     public List<User> getAllUser() {
         return userMapper.getAllUser();
     }
+
+    @Override
+    public User getuidAlluser(int uid) {
+        return userMapper.getuidAlluser(uid);
+    }
+
+    @Override
+    public void adduser(User user) {
+         userMapper.adduser(user);
+    }
+
+    @Override
+    public void deluser(int uid) {
+        userMapper.deluser(uid);
+    }
+
+    @Override
+    public void upuser(User user) {
+         userMapper.upuser(user);
+    }
+
 }
