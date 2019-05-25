@@ -15,4 +15,6 @@ public interface UserService {
     void deluser(int uid);
 //    //修改
     void upuser(User user);
+    //登陆
+    User login(String uname);
 }

@@ -3,10 +3,12 @@ package com.qf.controller;
 import com.qf.pojo.User;
 import com.qf.service.UserService;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+import java.lang.reflect.Method;
 import java.util.List;
 
 @Controller
@@ -27,12 +29,22 @@ public class UserController {
         return userService.getuidAlluser(uid);
     }
 
-    @RequestMapping("/adduser")
+
+    @RequestMapping(value = "/login",method = RequestMethod.POST)
     @ResponseBody
-    public int adduser(User user){
-        user.setUname("313214");
-        user.setUpass("231412");
-        user.setEmail("2144214");
+    public int login(@RequestParam String uname, @RequestParam String upass){
+        User user = userService.login(uname);
+        if (upass.equals(user.getUpass())){
+          return 1;
+        }else {
+            return 2;
+        }
+    }
+
+
+    @RequestMapping(value = "/register",method = RequestMethod.POST)
+    @ResponseBody
+    public int register(@RequestBody User user){
         userService.adduser(user);
         return 1;
     }
@@ -55,5 +67,7 @@ public class UserController {
         userService.upuser(user);
         return 1;
     }
+
+
 
 }

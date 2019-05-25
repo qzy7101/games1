@@ -22,4 +22,8 @@ public interface UserMapper {
    //修改
     @Update("update user set uname=#{uname},upass=#{upass},email=#{email} where uid=#{uid}")
     void upuser(User user);
+
+    //登陆
+    @Select("select * from user where uname = #{uname}")
+    User login(String uname);
 }

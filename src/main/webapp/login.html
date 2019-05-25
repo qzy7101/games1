@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <base id="base" href="${base}">
+    <meta charset="UTF-8">
+    <title>登陆</title>
+    <link rel="stylesheet" type="text/css" href="login/css/normalize.css" />
+    <link rel="stylesheet" type="text/css" href="login/css/demo.css" />
+    <!--必要样式-->
+    <link rel="stylesheet" type="text/css" href="login/css/component.css" />
+    <link rel="stylesheet" type="text/css" href="layui/css/layui.css" />
+    <script type="text/javascript" src="jquery/jquery.min.js"></script>
+    <script type="text/javascript" src="layui/layui.js"></script>
+    <style type="text/css">
+        .asd{
+            width: 300px;
+        }
+        .register_box{
+            width: 540px;
+            height: 500px;
+            padding: 35px;
+            color: #EEE;
+            position: absolute;
+            left: 50%;
+            top:50%;
+            margin-left: -200px;
+            margin-top: -250px;
+        }
+    </style>
+</head>
+<div class="container demo-1">
+    <div class="content">
+        <div id="large-header" class="large-header">
+            <canvas id="demo-canvas"></canvas>
+            <div class="register_box">
+                <h3>3E游戏欢迎你</h3>
+                <table>
+
+                    <tr>
+                        <th class="asd">
+                            <div class="input_outer">
+                                <span class="u_user"></span>
+                                <input id="username" name="username" class="text" style="color: #FFFFFF !important" type="text" placeholder="请输入账户">
+                            </div>
+                        </th>
+                        <th class="asd">
+                            <div id="username1"></div>
+                        </th>
+                    </tr>
+
+                    <tr>
+                        <th>
+                            <div class="input_outer">
+                                <span class="us_uer"></span>
+                                <input name="password" id="password" class="text" style="color: #FFFFFF !important" value="" type="password" placeholder="请输入密码">
+                            </div>
+                        </th>
+                        <th>
+                            <div id="password1"></div>
+                        </th>
+                    </tr>
+                </table>
+                <div id="register1"></div>
+
+                <div class="mb2"><a id = "sub" lay-filter="sub" class="act-but submit" href="javascript:;" style="color: #FFFFFF">登陆</a></div>
+                <div class="mb2"><a id = "zc" lay-filter="sub" class="act-but submit" href="register.html" style="color: #FFFFFF">注册</a></div>
+                <div class="mb2"><a id = "wj" lay-filter="sub" class="act-but submit" href="javascript:;" style="color: #FFFFFF">忘记密码</a></div>
+            </div>
+        </div>
+    </div>
+</div><!-- /container -->
+<script src="login/js/TweenLite.min.js"></script>
+<script src="login/js/EasePack.min.js"></script>
+<script src="login/js/rAF.js"></script>
+<script src="login/js/demo-1.js"></script>
+<script src="jquery/jquery-1.8.3.min.js"></script>
+<script src="rear_end/js/jquery.cookie.js"></script>
+</body>
+<script>
+    //加载弹出层组件
+    layui.use('layer',function(){
+        var layer = layui.layer;
+        //注册的点击事件
+        $("#sub").on("click",function(){
+            login();
+        })
+
+        $("body").keydown(function(){
+            if(event.keyCode == "13"){
+                login();
+            }
+        })
+
+        //登陆函数
+        function login(){
+            var uname = $(" input[ name='username' ] ").val();
+            var upass = $("input[name='password']").val();
+            $.ajax({
+                type:"post",
+                url:"login?uname="+uname+"&upass="+upass,
+                contentType: "application/json; charset=utf-8",
+                // data:{uname:uname,upass:upass},
+                success:function(data){
+                    if(data == 1){
+                        $.cookie('uname',uname)
+                        window.location = "../index.html";
+                    }else {
+                        document.getElementById("register1").innerHTML = "账号或密码错误";
+                    }
+                }
+            })
+        }
+    })
+
+
+    $("#username").blur(function () {
+        var uname = $(" input[ name='username' ] ").val()
+        var reg=/^[a-zA-Z][a-zA-Z0-9]{3,9}$/;
+        if(uname.length>0){
+            if(reg.test(uname)==false) {
+                document.getElementById("username1").innerHTML = "字母开头，4到10位";
+            }else {
+                document.getElementById("username1").innerHTML = "输入正确！";
+            }
+        }else {
+            document.getElementById("username1").innerHTML = "用户名不能为空";
+        }
+    })
+
+    $("#password").blur(function () {
+        var upass = $(" input[ name='password' ] ").val()
+        var reg=/^[a-zA-Z0-9]{4,10}$/;
+        if(upass.length>0){
+            if(reg.test(upass)==false) {
+                document.getElementById("password1").innerHTML = "4到10位,不能含有非法字符";
+            }else {
+                document.getElementById("password1").innerHTML = "输入正确！";
+            }
+        }else {
+            document.getElementById("password1").innerHTML = "密码不能为空";
+        }
+    })
+
+
+
+
+</script>
+</html>

@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <base id="base" href="${base}">
+    <meta charset="UTF-8">
+    <title>登陆倒计时</title>
+    <link rel="stylesheet" type="text/css" href="login/css/normalize.css" />
+    <link rel="stylesheet" type="text/css" href="login/css/demo.css" />
+    <!--必要样式-->
+    <link rel="stylesheet" type="text/css" href="login/css/component.css" />
+    <link rel="stylesheet" type="text/css" href="layui/css/layui.css" />
+    <script type="text/javascript" src="jquery/jquery.min.js"></script>
+    <script type="text/javascript" src="layui/layui.js"></script>
+</head>
+<body>
+<div class="container demo-1">
+    <div class="content">
+        <div id="large-header" class="large-header">
+            <canvas id="demo-canvas"></canvas>
+        </div>
+    </div>
+</div>
+<script src="login/js/TweenLite.min.js"></script>
+<script src="login/js/EasePack.min.js"></script>
+<script src="login/js/rAF.js"></script>
+<script src="login/js/demo-1.js"></script>
+</body>
+<script>
+    //加载弹出层组件
+    layui.use('layer',function(){
+
+        var layer = layui.layer;
+
+        //登录的点击事件
+        $("#sub").on("click",function(){
+            login();
+        })
+
+        $("body").keydown(function(){
+            if(event.keyCode == "13"){
+                login();
+            }
+        })
+
+        //登录函数
+        function login(){
+            var username = $(" input[ name='username' ] ").val();
+            $.ajax({
+                url:"login",
+                data:{"username":username},
+                type:"post",
+                dataType:"json",
+                success:function(data){
+                    if(data.success){
+                        window.location = "index";
+                    }else{
+                        layer.msg(data.msg);
+                    }
+                }
+            })
+        }
+    })
+</script>
+</html>

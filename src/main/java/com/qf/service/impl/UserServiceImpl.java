@@ -39,4 +39,9 @@ public class UserServiceImpl implements UserService {
          userMapper.upuser(user);
     }
 
+    @Override
+    public User login(String uname) {
+        return userMapper.login(uname);
+    }
+
 }
