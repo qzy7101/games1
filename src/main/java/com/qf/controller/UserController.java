@@ -49,6 +49,17 @@ public class UserController {
         return 1;
     }
 
+    @RequestMapping(value = "/verify",method = RequestMethod.POST)
+    @ResponseBody
+    public int login(@RequestParam String uname){
+        User user = userService.login(uname);
+        if (user == null){
+            return 1;
+        }else {
+            return 2;
+        }
+    }
+
     @RequestMapping("/deluser")
     @ResponseBody
     public void deluser(Integer uid){

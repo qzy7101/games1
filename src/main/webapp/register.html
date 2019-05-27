@@ -96,6 +96,12 @@
 <script src="jquery/jquery-1.8.3.min.js"></script>
 </body>
 <script>
+
+    // var zc = new Object();
+    // zc.a = 2;
+    // zc.b = 2;
+    // zc.c = 2;
+
     //加载弹出层组件
     layui.use('layer',function(){
         var layer = layui.layer;
@@ -112,6 +118,8 @@
 
         //注册函数
         function login(){
+
+
             var user = Object();
             user.uname = $(" input[ name='username' ] ").val();
             user.upass = $("input[name='password2']").val();
@@ -129,9 +137,7 @@
             })
         }
     })
-</script>
 
-<script>
     $("#username").blur(function () {
         var uname = $(" input[ name='username' ] ").val()
         var reg=/^[a-zA-Z][a-zA-Z0-9]{3,9}$/;
@@ -139,8 +145,23 @@
             if(reg.test(uname)==false) {
                 document.getElementById("username1").innerHTML = "字母开头，4到10位";
             }else {
-                document.getElementById("username1").innerHTML = "输入正确！";
+
+                $.ajax({
+                    contentType: "application/json; charset=utf-8",
+                    url:"verify?uname="+uname,
+                    type:"post",
+                    success:function(data){
+                        if(data == 1){
+                            document.getElementById("username1").innerHTML = "用户名可用！";
+                            zc.a = 1;
+                        }else {
+                            document.getElementById("username1").innerHTML = "用户名重复！";
+                        }
+                    }
+                })
+
             }
+
         }else {
             document.getElementById("username1").innerHTML = "用户名不能为空";
         }
@@ -154,6 +175,7 @@
                 document.getElementById("password1").innerHTML = "4到10位,不能含有非法字符";
             }else {
                 document.getElementById("password1").innerHTML = "输入正确！";
+
             }
         }else {
             document.getElementById("password1").innerHTML = "密码不能为空";
@@ -166,6 +188,7 @@
         if(upass.length>0){
             if(reg == upass) {
                 document.getElementById("password3").innerHTML = "输入正确！";
+                b = 1;
             }else {
                 document.getElementById("password3").innerHTML = "输入有误！";
             }
@@ -183,6 +206,7 @@
                 document.getElementById("email1").innerHTML = "邮箱输入有误";
             }else {
                 document.getElementById("email1").innerHTML = "输入正确！";
+                c = 1;
             }
         }else {
             document.getElementById("email1").innerHTML = "邮箱不能为空";
