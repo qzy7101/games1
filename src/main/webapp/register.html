@@ -94,18 +94,36 @@
 <script src="login/js/rAF.js"></script>
 <script src="login/js/demo-1.js"></script>
 <script src="jquery/jquery-1.8.3.min.js"></script>
+<script src="rear_end/js/jquery.cookie.js"></script>
 </body>
 <script>
 
-    // var zc = new Object();
-    // zc.a = 2;
-    // zc.b = 2;
-    // zc.c = 2;
+    var qq1 = 1;
+    var qq2 = 1;
+    var qq3 = 1;
+
+
+
+    //判断提示信息是否是正确的,如果正确启用注册按钮的方法
+    // var uname1 = $("#username1").val();
+    // var upass1 = $("#password2").val();
+    // var email3 = $("#email1").val();
+    //
+    //     if (uname1 == "用户名可用！" && upass1 == "输入正确！" && email3 == "输入正确！"){
+    //                 //注册的点击事件
+    //                 $("#sub").on("click",function(){
+    //                     login();
+    //                 })
+    //     }
+
+
+
 
     //加载弹出层组件
     layui.use('layer',function(){
         var layer = layui.layer;
-        //注册的点击事件
+       // 注册的点击事件
+
         $("#sub").on("click",function(){
             login();
         })
@@ -118,26 +136,31 @@
 
         //注册函数
         function login(){
-
-
             var user = Object();
             user.uname = $(" input[ name='username' ] ").val();
             user.upass = $("input[name='password2']").val();
             user.email = $("input[name='email']").val();
-            $.ajax({
-                contentType: "application/json; charset=utf-8",
-                url:"register",
-                data:JSON.stringify(user),
-                type:"post",
-                success:function(data){
-                    if(data == 1){
-                        window.location = "login.html";
+
+            if (qq1 > 1 && qq2 > 1 && qq3 > 1) {
+                $.ajax({
+                    contentType: "application/json; charset=utf-8",
+                    url:"register",
+                    data:JSON.stringify(user),
+                    type:"post",
+                    success:function(data){
+                        if(data == 1){
+                            $.cookie('uname',uname)
+                            window.location = "../index.html";
+                        }
                     }
-                }
-            })
+                })
+            }
+            else {
+                document.getElementById("register1").innerHTML = "输入有误！";
+            }
         }
     })
-
+    //验证用户名是否唯一
     $("#username").blur(function () {
         var uname = $(" input[ name='username' ] ").val()
         var reg=/^[a-zA-Z][a-zA-Z0-9]{3,9}$/;
@@ -148,12 +171,12 @@
 
                 $.ajax({
                     contentType: "application/json; charset=utf-8",
-                    url:"verify?uname="+uname,
+                    url:"yuname?uname="+uname,
                     type:"post",
                     success:function(data){
                         if(data == 1){
                             document.getElementById("username1").innerHTML = "用户名可用！";
-                            zc.a = 1;
+                            qq1 = 2;
                         }else {
                             document.getElementById("username1").innerHTML = "用户名重复！";
                         }
@@ -166,7 +189,7 @@
             document.getElementById("username1").innerHTML = "用户名不能为空";
         }
     })
-
+    //验证密码格式
     $("#password").blur(function () {
         var upass = $(" input[ name='password' ] ").val()
         var reg=/^[a-zA-Z0-9]{4,10}$/;
@@ -175,20 +198,19 @@
                 document.getElementById("password1").innerHTML = "4到10位,不能含有非法字符";
             }else {
                 document.getElementById("password1").innerHTML = "输入正确！";
-
             }
         }else {
             document.getElementById("password1").innerHTML = "密码不能为空";
         }
     })
-
+     //确认两次填入密码是否一致
     $("#password2").blur(function () {
         var upass = $(" input[ name='password2' ] ").val()
         var reg= $(" input[ name='password' ] ").val()
         if(upass.length>0){
             if(reg == upass) {
                 document.getElementById("password3").innerHTML = "输入正确！";
-                b = 1;
+                qq2 = 2;
             }else {
                 document.getElementById("password3").innerHTML = "输入有误！";
             }
@@ -197,7 +219,7 @@
         }
     })
 
-
+    //确定邮箱格式
     $("#email").blur(function () {
         var email = $(" input[ name='email' ] ").val()
         var reg=/^\w+@\w+(\.[a-zA-Z]{2,3}){1,2}$/;
@@ -206,7 +228,7 @@
                 document.getElementById("email1").innerHTML = "邮箱输入有误";
             }else {
                 document.getElementById("email1").innerHTML = "输入正确！";
-                c = 1;
+                qq3 = 2;
             }
         }else {
             document.getElementById("email1").innerHTML = "邮箱不能为空";

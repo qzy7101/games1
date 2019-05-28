@@ -19,8 +19,7 @@
 
 </head>
 
-<body>
-<div><button onclick="cs()">测试cookie</button></div>
+<body onload="load()">
 
     <!-- Preloader -->
     <div class="preloader d-flex align-items-center justify-content-center">
@@ -52,10 +51,15 @@
                                     <button type="submit" class="btn"><i class="fa fa-search"></i></button>
                                 </form>
                             </div>
+
                             <!-- Login Area -->
-                            <div class="login-area">
+                            <div id="index1" class="login-area" style="display: none;float: left;width: 120px">
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;欢迎你：<div id="uname1" style="float:right"></div>
+                            </div>
+                            <div id="index2" class="login-area" style="display: none">
                                 <a href="login.html"><span>登陆</span> <i class="fa fa-lock" aria-hidden="true"></i></a>
                             </div>
+
                             <div class="login-area">
                                 <div></div> <!--获取session中的userName -->
                             </div>
@@ -816,11 +820,26 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> - Col
     <!-- Active js -->
     <script src="js/active.js"></script>
     <script src="rear_end/js/jquery.cookie.js"></script>
+    <script src="js/vue.js"></script>
      <script>
-         function cs() {
+         //获取
+         // function cs() {
+         //     var a = $.cookie('uname')
+         //     alert(a)
+         // }
+
+         //onload="load()"
+
+         function load() {
              var a = $.cookie('uname')
-             alert(a)
+             if (a == null) {
+                 document.getElementById("index2").style.display="";//显
+             }else {
+                 document.getElementById("index1").style.display="";//显
+                 document.getElementById("uname1").innerHTML = a;
+             }
          }
+
      </script>
 </body>
 
