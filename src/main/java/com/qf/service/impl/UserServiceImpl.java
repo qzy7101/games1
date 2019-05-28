@@ -44,4 +44,9 @@ public class UserServiceImpl implements UserService {
         return userMapper.login(uname);
     }
 
+    @Override
+    public User email(String email) {
+        return userMapper.email(email);
+    }
+
 }

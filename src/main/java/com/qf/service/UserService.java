@@ -11,10 +11,12 @@ public interface UserService {
     User getuidAlluser(int uid);
     //增加
     void adduser(User user);
-//    //删除
+  //删除
     void deluser(int uid);
-//    //修改
+ //修改
     void upuser(User user);
     //登陆
     User login(String uname);
+//查询邮箱是否存在
+    User email(String email);
 }
