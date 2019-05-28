@@ -10,4 +10,6 @@ public class Springbootidea001Application {
 		SpringApplication.run(Springbootidea001Application.class, args);
 	}
 
+
+
 }

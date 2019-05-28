@@ -120,62 +120,8 @@
          
             <div class="row align-items-center">
                 <!-- *** Review Area *** -->
-                <div class="col-12 col-md-6">
-                    <div class="single-game-review-area style-2 mt-70">
-                        <div class="game-content">
-                            <span class="game-tag">Adventure</span>
-                            <a href="single-game-review.html" class="game-title">游戏名</a>
-                            <div class="game-meta">
-                                <div>价格：</div>
-                                <div>类型：</div>
-                            </div>
-                            <p>简介：---------------------------------------------------------------------------------------------------</p>
-                            <!-- Download & Rating Area -->
-                            <div class="download-rating-area">
-                                <div class="download-area">
-                                    <button>立即购买</button>                                  
-                                </div>
-                                <div class="rating-area mt-30">
-                                    <h3>评分</h3>
-                                    <div class="stars">
-                                        <i class="fa fa-star" aria-hidden="true"></i>
-                                        <i class="fa fa-star" aria-hidden="true"></i>
-                                        <i class="fa fa-star" aria-hidden="true"></i>
-                                        <i class="fa fa-star" aria-hidden="true"></i>
-                                        <i class="fa fa-star-half-o" aria-hidden="true"></i>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                <div class="col-12 col-md-6" id="dataOne">
 
-                <!-- *** Barfiller Area *** -->
-                <div class="col-12 col-md-6">
-                    <div class="egames-barfiller">
-                        <!-- Single Barfiller -->
-                        <div class="single-barfiller-area">
-                            <div id="bar1" class="barfiller">
-                                <div>已购买人数</div>
-                                <div>21</div>
-                            </div>
-                        </div>
-                        <!-- Single Barfiller -->
-                        <div class="single-barfiller-area">
-                            <div id="bar2" class="barfiller">
-                              <div>访问数</div>
-                              <div>34</div>
-                            </div>
-                        </div>
-                        <!-- Single Barfiller -->
-                        <div class="single-barfiller-area">
-                            <div id="bar3" class="barfiller">
-                                <div>上线时间</div>
-                                <div>2018-3-3</div>
-                            </div>
-                        </div>
-                        <!-- Single Barfiller -->                   
-                    </div>
                 </div>
             </div>
         </div>
@@ -308,6 +254,51 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> - Col
     <script src="js/plugins/plugins.js"></script>
     <!-- Active js -->
     <script src="js/active.js"></script>
+
+<script>
+
+    var a = window.location.search.split("=")[1]
+    $(function () {
+
+        $.ajax({
+            type: "GET",
+            url: "getOneGame?yyid="+a,
+            async: false,
+            success: function (data) {
+                $.each(data, function (index, element) {
+                    var trStr =
+
+                        "<div class=\"single-game-review-area style-2 mt-70\">\n" +
+                        "<div class=\"game-content\">\n" +
+                        "<span class=\"game-tag\">Adventure</span>\n" +
+                        "<a  class=\"game-title\">"+element.yyname+"</a>\n" +
+                        "<div class=\"game-meta\">\n" +
+                        "<div>价格："+element.yyprice+"</div>\n" +
+                        "<div>类型：</div>\n" +
+                        "</div>\n" +
+                        "<p>简介："+element.yyjj+"</p>\n" +
+                        "<div class=\"download-rating-area\">\n" +
+                        "<div class=\"download-area\">\n" +
+                        "<button>立即购买</button>\n" +
+                        "</div>\n" +
+                        "</div>\n" +
+                        "</div>\n" +
+                        "</div>";
+
+                    $("#dataOne").append(trStr);
+
+
+                });
+
+            }
+
+        });
+
+
+    })
+
+</script>
+
 </body>
 
 </html>

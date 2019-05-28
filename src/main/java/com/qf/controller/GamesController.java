@@ -54,7 +54,6 @@ public class GamesController {
     @RequestMapping("updGames")
 
     public boolean upGames( Games games){
-
            gamesService.upGames(games);
         return true;
     }

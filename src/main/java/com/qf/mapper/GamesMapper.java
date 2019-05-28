@@ -28,7 +28,7 @@ public interface GamesMapper {
     /**
      * 改
      */
-    @Select("UPDATE games SET gname=#{gname},genre=#{genre},price=#{price},synopsis={synopsis},purchases=#{purchases},pv=#{pv},onlinetime=#{onlinetime},picture=#{picture}")
+    @Select("UPDATE games SET gname=#{gname},genre=#{genre},price=#{price},synopsis=#{synopsis},purchases=#{purchases},pv=#{pv},onlinetime=#{onlinetime},picture=#{picture} where gid=#{gid}")
     void upGames(Games games);
 
 
