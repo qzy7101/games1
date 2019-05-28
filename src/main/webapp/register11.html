@@ -106,14 +106,14 @@
             var uname = $(" input[ name='username' ] ").val();
             $.ajax({
                 type:"post",
-                url:"wangj?uname="+uname,
+                url:"yuname?uname="+uname,
                 contentType: "application/json; charset=utf-8",
                 // data:{uname:uname,upass:upass},
                 success:function(data){
                     if(data == 1){
-                        document.getElementById("register1").innerHTML = "账号不存在";
+                        document.getElementById("username1").innerHTML = "账号不存在";
                     }else {
-                        document.getElementById("register1").innerHTML = "账号存在，请更改";
+                        document.getElementById("username1").innerHTML = "账号存在";
                         qq1 = 2;
                     }
                 }
@@ -176,9 +176,6 @@
         }, 1000);
 
 
-
-
-
     if (qq1 > 1 && qq2 > 1) {
 
             $.ajax({
@@ -205,10 +202,12 @@
     $("#yzm3").on("click",function(){
 
         var yzm = $(" input[ name='yzm' ] ").val()
+        var zhangh = $(" input[ name='username' ] ").val()
 
         $.ajax({
             type:"post",
-            url:"yzm2?yzm="+yzm,
+            // url:"login?uname="+uname+"&upass="+upass,
+            url:"yzm2?yzm="+yzm+"&zhangh="+zhangh,
             contentType: "application/json; charset=utf-8",
             success:function(data){
                 if (data == 1) {

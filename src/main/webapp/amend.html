@@ -3,8 +3,156 @@
 <head>
     <meta charset="UTF-8">
     <title>修改密码</title>
+    <link rel="stylesheet" type="text/css" href="login/css/normalize.css" />
+    <link rel="stylesheet" type="text/css" href="login/css/demo.css" />
+    <!--必要样式-->
+    <link rel="stylesheet" type="text/css" href="login/css/component.css" />
+    <link rel="stylesheet" type="text/css" href="layui/css/layui.css" />
+    <script type="text/javascript" src="jquery/jquery.min.js"></script>
+    <script type="text/javascript" src="layui/layui.js"></script>
+    <style type="text/css">
+        .asd{
+            width: 300px;
+        }
+        .register_box{
+            width: 540px;
+            height: 500px;
+            padding: 35px;
+            color: #EEE;
+            position: absolute;
+            left: 50%;
+            top:50%;
+            margin-left: -200px;
+            margin-top: -250px;
+        }
+    </style>
 </head>
 <body>
-修改密码
+<div class="container demo-1">
+    <div class="content">
+        <div id="large-header" class="large-header">
+            <canvas id="demo-canvas"></canvas>
+            <div class="register_box">
+                <table>
+
+                    <tr>
+                        <th class="asd">
+                            <div class="input_outer">
+                                <span class="u_user"></span>
+                                <input id="userpass1" name="userpass1" class="text" style="color: #FFFFFF !important" type="password" placeholder="请输入新密码">
+                            </div>
+                        </th>
+                        <th class="asd">
+                            <div id="userpass2"></div>
+                        </th>
+                    </tr>
+
+                    <tr>
+                        <th>
+                            <div class="input_outer">
+                                <span class="us_uer"></span>
+                                <input name="userpass3" id="userpass3" class="text" style="color: #FFFFFF !important"  type="password" placeholder="请确认新密码">
+                            </div>
+                        </th>
+                        <th>
+                            <div id="userpass4"></div>
+                        </th>
+                    </tr>
+                </table>
+                 <div id = "fk"></div>
+                <div class="mb2"><a onclick="updata()" id="updata" lay-filter="sub" class="act-but submit" href="javascript:;" style="color: #FFFFFF">确定更改</a></div>
+
+
+            </div>
+        </div>
+    </div>
+</div>
 </body>
+<script src="login/js/TweenLite.min.js"></script>
+<script src="login/js/EasePack.min.js"></script>
+<script src="login/js/rAF.js"></script>
+<script src="login/js/demo-1.js"></script>
+
+<script>
+
+    var qq1 = 1;
+    var qq2 = 1;
+
+    //验证密码格式
+    $("#userpass1").blur(function () {
+        var upass = $(" input[ name='userpass1' ] ").val()
+        var reg=/^[a-zA-Z0-9]{4,10}$/;
+        if(upass.length>0){
+            if(reg.test(upass)==false) {
+                document.getElementById("userpass2").innerHTML = "4到10位,不能含有非法字符";
+            }else {
+                document.getElementById("userpass2").innerHTML = "输入正确！";
+                qq2 = 2;
+            }
+        }else {
+            document.getElementById("userpass2").innerHTML = "密码不能为空";
+        }
+    })
+
+    //确认两次填入密码是否一致
+    $("#userpass3").blur(function () {
+
+        var upass1 = $(" input[ name='userpass3' ] ").val()
+        var upass2 = $(" input[ name='userpass1' ] ").val()
+
+        $.ajax({
+            url:"/bjpass?upass1="+upass1+"&upass2="+upass2,
+            type:"post",
+            contentType: "application/json; charset=utf-8",
+            success:function(data){
+                if(data == 1){
+                    document.getElementById("userpass4").innerHTML = "输入正确";
+                    qq1 = 2;
+                }else {
+                    document.getElementById("userpass4").innerHTML = "输入有误";
+                }
+
+            }
+        })
+    })
+
+
+    //修改密码
+    function updata(){
+        var userpass = $("input[name='userpass3']").val();
+        alert(userpass);
+        if (qq1 > 1 && qq2 > 1) {
+            alert("55555555555")
+            $.ajax({
+
+                url:"upuser?userpass5="+userpass,
+
+                type:"post",
+                contentType: "application/json; charset=utf-8",
+                success:function(data){
+                    alert("3333333333");
+                    if(data == 1){
+                        window.location = "./login.html";
+                    }else {
+                        document.getElementById("fk").innerHTML = "修改失败";
+                    }
+                }
+            })
+        }
+        else {
+            document.getElementById("register1").innerHTML = "输入有误！";
+        }
+    }
+
+
+
+
+
+
+
+
+</script>
+
+
+
 </html>

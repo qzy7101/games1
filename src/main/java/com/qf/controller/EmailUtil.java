@@ -1,12 +1,12 @@
 package com.qf.controller;
 
 
-import org.apache.commons.lang3.RandomStringUtils;
+
+
 
 import javax.mail.*;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
-import javax.servlet.http.HttpSession;
 import java.util.Properties;
 
 
