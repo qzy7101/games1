@@ -92,7 +92,7 @@ public class UserController {
         return 1;
     }
 
-    //验证验证码是否一致
+    //检测验证码是否一致
     @RequestMapping(value = "/yzm2",method = RequestMethod.POST)
     @ResponseBody
     public int yzm2(@RequestParam String yzm , HttpSession session){
