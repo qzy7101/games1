@@ -17,6 +17,6 @@ public interface UserService {
     void upuser(User user);
     //登陆
     User login(String uname);
-//查询邮箱是否存在
+//查询邮箱是否存在a
     User email(String email);
 }

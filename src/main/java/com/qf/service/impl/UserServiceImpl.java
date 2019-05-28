@@ -43,7 +43,7 @@ public class UserServiceImpl implements UserService {
     public User login(String uname) {
         return userMapper.login(uname);
     }
-
+//a
     @Override
     public User email(String email) {
         return userMapper.email(email);
