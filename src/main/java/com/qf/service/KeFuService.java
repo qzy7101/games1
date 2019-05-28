@@ -8,4 +8,6 @@ public interface KeFuService {
     List<KeFu> getAllKeFu();
 
     void addKeFu(KeFu keFu);
+
+    void upKeFu(KeFu keFu);
 }

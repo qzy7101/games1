@@ -22,4 +22,11 @@ public class KeFuServiceImpl implements KeFuService {
     public void addKeFu(KeFu keFu) {
         keFuMapper.addKeFu(keFu);
     }
+
+    @Override
+    public void upKeFu(KeFu keFu) {
+        keFuMapper.upKeFu(keFu);
+    }
+
+
 }

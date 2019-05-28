@@ -25,4 +25,10 @@ public class KeFuController {
     public void addKeFu(KeFu keFu){
         keFuService.addKeFu(keFu);
     }
+
+    @RequestMapping("upKeFu")
+    @ResponseBody
+    public void upKeFu(KeFu keFu){
+        keFuService.upKeFu(keFu);
+    }
 }
