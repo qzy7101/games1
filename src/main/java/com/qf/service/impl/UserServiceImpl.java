@@ -6,12 +6,13 @@ import com.qf.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.annotation.Resource;
 import java.util.List;
 
 @Service
 public class UserServiceImpl implements UserService {
 
-    @Autowired
+    @Resource
     private UserMapper userMapper;
 
     @Override
@@ -42,6 +43,11 @@ public class UserServiceImpl implements UserService {
     @Override
     public User login(String uname) {
         return userMapper.login(uname);
+    }
+
+    @Override
+    public User email(String email) {
+        return null;
     }
 
 }
