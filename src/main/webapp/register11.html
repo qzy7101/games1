@@ -3,7 +3,7 @@
 <head>
     <base id="base" href="${base}">
     <meta charset="UTF-8">
-    <title>登陆倒计时</title>
+    <title>忘记密码</title>
     <link rel="stylesheet" type="text/css" href="login/css/normalize.css" />
     <link rel="stylesheet" type="text/css" href="login/css/demo.css" />
     <!--必要样式-->
@@ -11,12 +11,80 @@
     <link rel="stylesheet" type="text/css" href="layui/css/layui.css" />
     <script type="text/javascript" src="jquery/jquery.min.js"></script>
     <script type="text/javascript" src="layui/layui.js"></script>
+    <style type="text/css">
+        .asd{
+            width: 300px;
+        }
+        .register_box{
+            width: 540px;
+            height: 500px;
+            padding: 35px;
+            color: #EEE;
+            position: absolute;
+            left: 50%;
+            top:50%;
+            margin-left: -200px;
+            margin-top: -250px;
+        }
+    </style>
 </head>
 <body>
 <div class="container demo-1">
     <div class="content">
         <div id="large-header" class="large-header">
             <canvas id="demo-canvas"></canvas>
+            <div class="register_box">
+                <h3>3E游戏欢迎你</h3>
+                <table>
+
+                    <tr>
+                        <th class="asd">
+                            <div class="input_outer">
+                                <span class="u_user"></span>
+                                <input id="username" name="username" class="text" style="color: #FFFFFF !important" type="text" placeholder="请输入账户">
+                            </div>
+                        </th>
+                        <th class="asd">
+                            <div id="username1"></div>
+                        </th>
+                    </tr>
+
+                    <tr>
+                        <th>
+                            <div class="input_outer">
+                                <span class="us_uer"></span>
+                                <input name="email" id="email" class="text" style="color: #FFFFFF !important" value="" type="text" placeholder="请输入邮箱">
+                            </div>
+                        </th>
+                        <th>
+                            <div id="email1"></div>
+                        </th>
+                    </tr>
+                </table>
+                <div id="register1"></div>
+
+                <!--<div class="mb2"><a id = "sub" lay-filter="sub" class="act-but submit" href="javascript:;" style="color: #FFFFFF">发送验证码</a></div>-->
+
+            <p class="code">
+                    <span class="info">
+                        <em style="display: none" class="count">（60）秒后重新发送</em>
+                        <div class="mb2"><a id = "sub" lay-filter="sub" class="act-but submit" href="javascript:;" style="color: #FFFFFF">发送验证码</a></div>
+                    </span>
+                </p>
+
+
+                <div id="yzm1" class="input_outer" style="display: none">
+                    <span class="us_uer"></span>
+                    <input name="yzm" id="yzm" class="text" style="color: #FFFFFF !important" value="" type="text" placeholder="请输入验证码">
+
+                    <div id="yzm2"></div>
+
+                    <div class="mb2"><a id="yzm3" lay-filter="sub" class="act-but submit" href="javascript:;" style="color: #FFFFFF">确认验证码</a></div>
+
+
+                </div>
+
+            </div>
         </div>
     </div>
 </div>
@@ -25,40 +93,137 @@
 <script src="login/js/rAF.js"></script>
 <script src="login/js/demo-1.js"></script>
 </body>
+
+
 <script>
-    //加载弹出层组件
-    layui.use('layer',function(){
 
-        var layer = layui.layer;
+    qq1 = 1;
+    qq2 = 1;
 
-        //登录的点击事件
-        $("#sub").on("click",function(){
-            login();
-        })
 
-        $("body").keydown(function(){
-            if(event.keyCode == "13"){
-                login();
-            }
-        })
-
-        //登录函数
-        function login(){
-            var username = $(" input[ name='username' ] ").val();
+    $("#username").blur(function () {
+        //验证账号是否存在
+            var uname = $(" input[ name='username' ] ").val();
             $.ajax({
-                url:"login",
-                data:{"username":username},
                 type:"post",
-                dataType:"json",
+                url:"wangj?uname="+uname,
+                contentType: "application/json; charset=utf-8",
+                // data:{uname:uname,upass:upass},
                 success:function(data){
-                    if(data.success){
-                        window.location = "index";
-                    }else{
-                        layer.msg(data.msg);
+                    if(data == 1){
+                        document.getElementById("register1").innerHTML = "账号不存在";
+                    }else {
+                        document.getElementById("register1").innerHTML = "账号存在，请更改";
+                        qq1 = 2;
                     }
                 }
             })
+    })
+
+   //验证邮箱是否存在
+    $("#email").blur(function () {
+        var email = $(" input[ name='email' ] ").val()
+        var reg=/^\w+@\w+(\.[a-zA-Z]{2,3}){1,2}$/;
+        if(email.length>0){
+            if(reg.test(email)==false) {
+                document.getElementById("email1").innerHTML = "邮箱输入有误";
+            }else {
+                $.ajax({
+                    type:"post",
+                    url:"email?email="+email,
+                    contentType: "application/json; charset=utf-8",
+                    // data:{uname:uname,upass:upass},
+                    success:function(data){
+                        if(data == 1){
+                            document.getElementById("register1").innerHTML = "邮箱号存在，请点击发送验证码";
+                            qq1 = 2;
+                        }else {
+                            document.getElementById("register1").innerHTML = "邮箱号不存在";
+                        }
+                    }
+                })
+                document.getElementById("email1").innerHTML = "输入正确！"
+                document.getElementById("yzm1").style.display="";//显
+                qq2 = 2;
+            }
+        }else {
+            document.getElementById("email1").innerHTML = "邮箱不能为空";
         }
     })
+
+    //发送验证码邮件
+    $("#sub").on("click",function(){
+
+        var email = $(" input[ name='email' ] ").val()
+
+        //60秒后重新发送
+        var btnSend = $("#sub");
+        var msg = $('.count');
+        btnSend.removeAttr('style').attr('style', 'display:none;');
+        msg.removeAttr('style').attr('style', 'display:block');
+        var left_time = 60;
+        var tt = window.setInterval(function(){
+            left_time = left_time - 1;
+            if (left_time <= 0) {
+                window.clearInterval(tt);
+                msg.html('（60）秒后重新发送');
+                msg.removeAttr('style').attr('style', 'display:none;');
+                btnSend.removeAttr('style').attr('style', 'display:block');
+            }
+            else {
+                msg.html('（' + left_time + '）秒后重新发送');
+            }
+        }, 1000);
+
+
+
+
+
+    if (qq1 > 1 && qq2 > 1) {
+
+            $.ajax({
+                type:"post",
+                url:"yzm?email="+email,
+                contentType: "application/json; charset=utf-8",
+                // data:{uname:uname,upass:upass},
+                success:function(data){
+                    if (data == 1) {
+                        document.getElementById("yzm2").innerHTML = "验证码发送成功";
+                    }else {
+                        document.getElementById("yzm2").innerHTML = "验证码发送失败";
+                    }
+
+                }
+            })
+        }else {
+            document.getElementById("register1").innerHTML = "输入有误！";
+        }
+    })
+
+
+    //判断验证码是否输入正确
+    $("#yzm3").on("click",function(){
+
+        var yzm = $(" input[ name='yzm' ] ").val()
+
+        $.ajax({
+            type:"post",
+            url:"yzm2?yzm="+yzm,
+            contentType: "application/json; charset=utf-8",
+            success:function(data){
+                if (data == 1) {
+                    //跳转到更改密码界面
+                    window.location = "../amend.html";
+                }else {
+                    document.getElementById("yzm2").innerHTML = "验证码错误，请重新输入";
+                }
+            }
+        })
+
+
+    })
+
+
 </script>
+
 </html>
