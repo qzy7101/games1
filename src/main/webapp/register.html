@@ -136,6 +136,7 @@
 
         //注册函数
         function login(){
+            var username = $(" input[ name='username' ] ").val();
             var user = Object();
             user.uname = $(" input[ name='username' ] ").val();
             user.upass = $("input[name='password2']").val();
@@ -149,7 +150,7 @@
                     type:"post",
                     success:function(data){
                         if(data == 1){
-                            $.cookie('uname',uname)
+                            $.cookie('uname',username)
                             window.location = "../index.html";
                         }
                     }
