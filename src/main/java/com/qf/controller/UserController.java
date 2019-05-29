@@ -46,8 +46,10 @@ public class UserController {
     @RequestMapping(value = "/yuname",method = RequestMethod.POST)
     @ResponseBody
     public int wangj(@RequestParam String uname){
+
         User yh = userService.login(uname);
         if (yh != null){
+
             return 2;
         }else {
             return 1;
@@ -95,15 +97,15 @@ public class UserController {
     //检测验证码是否一致
     @RequestMapping(value = "/yzm2",method = RequestMethod.POST)
     @ResponseBody
-    public int yzm2(@RequestParam String yzm , HttpSession session){
-
+    public int yzm2(@RequestParam String yzm ,@RequestParam String zhangh,HttpSession session){
+        //获取当前需要更改密码的用户的用户名放入session
+        session.setAttribute("zhangh",zhangh);
        //获取session中的验证码
         String yzm4=(String)session.getAttribute("yzm");
 //        Object yzm4 = session.getAttribute("yzm");
         //String yzm1 = request.getSession().getAttribute("yzm").toString();
 
 //        String yzm1=(String)session.getAttribute("yzm");
-
 
         if (yzm.equals(yzm4)){
             return 1;
@@ -120,7 +122,7 @@ public class UserController {
         return 1;
     }
 
-
+//根据用户id删除用户
     @RequestMapping("/deluser")
     @ResponseBody
     public void deluser(Integer uid){
@@ -128,18 +130,34 @@ public class UserController {
        userService.deluser(uid);
     }
 
-
+//修改密码
     @RequestMapping("/upuser")
     @ResponseBody
-    public int upuser(User user){
-        user.setUid(2);
-        user.setUname("xiugai");
-        user.setUpass("312412");
-        user.setEmail("47612376");
+    public int upuser(@RequestParam String userpass5,HttpSession session){
+
+        System.out.println(userpass5);
+        //从session中取出修改密码用户的用户名
+        String uname =(String)session.getAttribute("zhangh");
+        //调用根据uname查询对象的方法
+        User user = userService.login(uname);
+        //将user中的密码更换为页面传递的
+        user.setUpass(userpass5);
+        System.out.println(user);
+        //调用修改方法修改
         userService.upuser(user);
+
         return 1;
     }
 
+    @RequestMapping("/bjpass")
+    @ResponseBody
+    public int bjpas(@RequestParam String upass1,@RequestParam String upass2){
 
+        if (upass1.equals(upass2)){
+            return 1;
+        }else {
+            return 2;
+        }
+    }
 
 }

@@ -23,7 +23,12 @@ public interface UserMapper {
     @Update("update user set uname=#{uname},upass=#{upass},email=#{email} where uid=#{uid}")
     void upuser(User user);
 
-    //登陆
+    //登陆(通过uname查询对象)
     @Select("select * from user where uname = #{uname}")
     User login(String uname);
+
+    //查询邮箱是否存在
+    @Select("select * from user where email = #{email}")
+    User email(String email);
+
 }
