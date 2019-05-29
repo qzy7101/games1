@@ -183,19 +183,19 @@
                         <form action="#" method="post">
                             <div class="row">
                                 <div class="col-12 col-lg-6">
-                                    <input type="text" class="form-control" id="name" placeholder="请留下你的姓名">
+                                    <input type="text" class="form-control" id="name"  name="t1" placeholder="请留下你的姓名">
                                 </div>
                                 <div class="col-12 col-lg-6">
-                                    <input type="email" class="form-control" id="email" placeholder="请留下你的Email">
+                                    <input type="email" class="form-control" id="email" name="t2" placeholder="请留下你的Email">
                                 </div>
                                 <div class="col-12">
-                                    <input type="text" class="form-control" id="subject" placeholder="你的主题">
+                                    <input type="text" class="form-control" id="subject" name="t3" placeholder="你的主题">
                                 </div>
                                 <div class="col-12">
-                                    <textarea name="message" class="form-control" id="message" cols="30" rows="10" placeholder="你的奇思妙想或者烦恼"></textarea>
+                                    <input textarea name="message" class="form-control" id="message"  cols="30" rows="10" placeholder="你的奇思妙想或者烦恼"></inputtextarea>
                                 </div>
                                 <div class="col-12">
-                                    <button class="btn egames-btn w-100" type="submit">留下你的痕迹</button>
+                                    <button class="btn egames-btn w-100"  onclick="load()">留下你的痕迹</button>
                                 </div>
                             </div>
                         </form>
@@ -327,6 +327,37 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> - Col
     <script src="js/plugins/plugins.js"></script>
     <!-- Active js -->
     <script src="js/active.js"></script>
+<script type="text/javascript">
+
+    function load() {
+
+        var kefu=Object();
+            kefu.kname= $("input[name='t1']").val();
+            kefu.email= $("input[name='t2']").val();
+            kefu.theme= $("input[name='t3']").val();
+            kefu.suggest= $("input[name='message']").val();
+
+
+
+        console.log(kefu);
+
+            $.ajax({
+                type: 'GET',
+                url: 'addKeFu',
+                async:false,
+                data:JSON.stringify(kefu),
+                contentType:'application/json;charset=utf-8',
+                success: function (data) {
+                        if (data==1) {
+                            alert("添加成功");
+                            window.location.reload();
+                        }
+                    }
+
+            });
+
+    }
+</script>
 </body>
 
 </html>

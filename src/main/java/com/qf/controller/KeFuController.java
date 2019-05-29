@@ -3,8 +3,7 @@ package com.qf.controller;
 import com.qf.pojo.KeFu;
 import com.qf.service.KeFuService;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import java.util.List;
@@ -22,8 +21,10 @@ public class KeFuController {
 
     @RequestMapping("addKeFu")
     @ResponseBody
-    public void addKeFu(KeFu keFu){
+    public int addKeFu(@RequestBody KeFu keFu){
+
         keFuService.addKeFu(keFu);
+        return 1;
     }
 
     @RequestMapping("upKeFu")
