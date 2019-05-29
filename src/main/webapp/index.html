@@ -288,7 +288,6 @@
         </div>
     </div>
 
-    <!-- Copywrite Area -->
     <div class="copywrite-content">
         <div class="container h-100">
             <div class="row h-100 align-items-center">
@@ -325,26 +324,9 @@
 <script>
     $(function () {
 
-
-        $.ajax({
-            type: "GET",
-            url: "allYyGames",
-            async: false,
-            ContentType: "application/json; charset=utf-8",
-            success: function (data) {
-                $.each(data, function (index, element) {
-                    var trStr =
-                        " <div class=\"carousel-item active\">\n" +
-                        " <img src=\""+element.yyphoto+"\">\n" +
-                        " </div>";
-
-                    $("#asdffdssa").append(trStr);
-
-                });
-            }
-        });
-
-
+        /**
+         * 视频区JS
+         */
         $.ajax({
             type: "GET",
             url: "allYyGames",
@@ -374,7 +356,9 @@
 
     });
 
-
+    /**
+     * 视频JS
+     */
     function vidoSee(yid) {
 
         $.ajax({
