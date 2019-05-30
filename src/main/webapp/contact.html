@@ -327,34 +327,34 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> - Col
     <script src="js/plugins/plugins.js"></script>
     <!-- Active js -->
     <script src="js/active.js"></script>
+
 <script type="text/javascript">
 
     function load() {
         alert(1);
-        var kefu=Object();
-            kefu.kname= $("input[name='t1']").val();
-            kefu.email= $("input[name='t2']").val();
-            kefu.theme= $("input[name='t3']").val();
-            kefu.suggest= $("input[name='message']").val();
+        var json = {
+            "kname": $("input[name=t1]").val(),
+            "email": $("input[name=t2]").val(),
+            "theme": $("input[name=t3]").val(),
+            "suggest": $("input[name=message]").val(),
+        };
+        var jsonstr=JSON.stringify(json);
+        // alert(kefu);
+        // console.log(kefu);
+        $.ajax({
+            type: "post",
+            url: "addKeFu",
+            async: false,
+            contentType: 'application/json;charset=utf-8',
+            data:jsonstr,
+            success: function (data) {
+                if (data == 1) {
+                    alert("添加成功");
+                    window.location.reload();
+                }
+            }
 
-            alert(kefu);
-
-        console.log(kefu);
-
-            $.ajax({
-                type: "GET",
-                url: "addKeFu",
-                async:false,
-                data:JSON.stringify(kefu),
-                contentType:'application/json;charset=utf-8',
-                success: function (data) {
-                        if (data==1) {
-                            alert("添加成功");
-                            window.location.reload();
-                        }
-                    }
-
-            });
+        });
 
     }
 </script>
