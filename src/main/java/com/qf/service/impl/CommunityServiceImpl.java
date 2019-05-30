@@ -2,6 +2,7 @@ package com.qf.service.impl;
 
 import com.qf.mapper.CommunityMapper;
 import com.qf.pojo.Community;
+import com.qf.pojo.Community1;
 import com.qf.service.CommunityService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -37,5 +38,15 @@ public class CommunityServiceImpl implements CommunityService
     @Override
     public Community updCommunity(Community community) {
         return communityMapper.updCommunity(community);
+    }
+
+    @Override
+    public Community getOneCommunity1(String cheadline) {
+        return communityMapper.getOneCommunity1(cheadline);
+    }
+
+    @Override
+    public List<Community1> selAll() {
+        return communityMapper.selAll();
     }
 }

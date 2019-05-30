@@ -1,6 +1,7 @@
 package com.qf.mapper;
 
 import com.qf.pojo.Community;
+import com.qf.pojo.Community1;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
 import java.util.List;
@@ -20,5 +21,11 @@ public interface CommunityMapper {
 
     @Select("update community set cheadline = #{cheadline},uname = #{uname},hits = #{hits},pubdate = #{pubdate},details = #{details} where cid = #{cid}")
     Community updCommunity(Community community);
+
+    @Select("select * from community where cheadline = #{cheadline}")
+    Community getOneCommunity1(String cheadline);
+
+    @Select("select u.uid,u.uname,u.email,c.cid,c.cheadline,c.hits,c.pubdate,c.details,r.rid,r.rname,r.rtime,r.rdetails from user u,community c,reply r where u.uname = c.uname and c.cid = r.cid")
+    List<Community1> selAll();
 
 }

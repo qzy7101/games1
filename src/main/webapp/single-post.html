@@ -121,8 +121,8 @@
                 <!-- Post Details Content Area -->
                 <div class="col-12 col-lg-8">
                     <div class="mt-100">
-                        <div class="post-details-content mb-100">
-                            <div class="blog-thumbnail mb-50">
+                        <div class="post-details-content mb-100" id="bbbb">
+                            <!--<div class="blog-thumbnail mb-50">
                                 <img src="img/bg-img/24.jpg" alt="">
                             </div>
                             <div class="blog-content">
@@ -132,11 +132,12 @@
                                     <a href="#" class="post-author">发帖人</a>
                                    
                                 </div>
-                                <p>内容： -------------------------------------------------------</p>                              
-                            </div>
+                                <p>内容： -&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;</p>
+                            </div>-->
                         </div>
 
                         <!-- Comment Area Start -->
+                        <button onclick="selectReply()" id="aaa">回复内容</button>
                         <div class="comment_area clearfix mb-70">
                             <h4 class="mb-50">回复内容</h4>
 
@@ -144,16 +145,16 @@
                                 <!-- Single Comment Area -->
                                 <li class="single_comment_area">
                                     <!-- Comment Content -->
-                                    <div class="comment-content d-flex">
+                                    <div class="comment-content d-flex" id="bbbbb">
                                         <!-- Comment Author -->
-                                        <div class="comment-author">
+                                        <!--<div class="comment-author">
                                             <img src="img/bg-img/32.jpg" alt="author">
                                         </div>
-                                        <!-- Comment Meta -->
+                                        &lt;!&ndash; Comment Meta &ndash;&gt;
                                         <div class="comment-meta">                                           
                                             <a href="#" class="post-date">时间</a>
-                                            <p>内容：------------------------------------------------------------</p>                                   
-                                        </div>
+                                            <p>内容：&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;</p>
+                                        </div>-->
                                     </div>                                   
                                 </li>                           
                             </ol>
@@ -163,24 +164,20 @@
                             <h4 class="mb-50">发表评论</h4>
 
                             <!-- Reply Form -->
-                            <div class="contact-form-area">
-                                <form action="#" method="post">
+                            <div id="pl" class="contact-form-area" style="display: none">
                                     <div class="row">
                                         <div class="col-12 col-lg-6">
-                                            <input type="text" class="form-control" id="name" placeholder="姓名">
-                                        </div>                                      
-                                        <div class="col-12">
-                                            <input type="text" class="form-control" id="subject" placeholder="标题">
+                                            <input type="text"  readonly="readonly" class="form-control" id="name" placeholder="姓名">
                                         </div>
                                         <div class="col-12">
                                             <textarea name="message" class="form-control" id="message" cols="30" rows="10" placeholder="内容"></textarea>
                                         </div>
                                         <div class="col-12">
-                                            <button class="btn egames-btn w-100" type="submit">发表评论</button>
+                                            <button class="btn egames-btn w-100" onclick="addReply()" type="submit">发表评论</button>
                                         </div>
                                     </div>
-                                </form>
                             </div>
+                            <div id="login" style="display: none"><a href="login.html">请登录</a></div>
                         </div>
                     </div>
                 </div>
@@ -386,6 +383,109 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> - Col
     <script src="js/plugins/plugins.js"></script>
     <!-- Active js -->
     <script src="js/active.js"></script>
+    
+    <script src="rear_end/js/jquery.cookie.js"></script>
+
+<script>
+    $(function(){
+        $.ajax({
+            type: "post",
+            url: "getOneCommunity1",
+            async: false,
+            ContentType: "application/json; charset=utf-8",
+
+            success: function (data) {
+                    var trStr =
+                    "<div class='blog-thumbnail mb-50'>\n"+
+                    "<img src='img/bg-img/24.jpg' alt=''>\n"+
+                        "</div>\n"+
+                    "<div class='blog-content'>\n"+
+                    "<h4 class='post-title'>帖子标题:"+data.cheadline+"</h4>\n"+
+                    "<div class='post-meta mb-30'>\n"+
+                    "<a href='#' class='post-date'>发帖时间:"+data.pubdate+"</a>\n"+
+                    "发帖人:<a href='#' class='post-author'>"+data.uname+"</a>\n"+
+
+                    "</div>\n"+
+                    "<p>内容:"+data.details+"</p>\n"+
+                    "</div>";
+                    $("#bbbb").append(trStr);
+
+
+            }
+        });
+
+    })
+
+
+    function selectReply() {
+
+        $.ajax({
+            type: "post",
+            url:"getOne",
+            ContentType: "application/json; charset=utf-8",
+            success: function (data) {
+                $.each(data, function (index, element) {
+                    var trStr1 =
+                        "<div class=\"comment-author\">\n" +
+                        "<img src=\"img/bg-img/32.jpg\" alt=\"author\">\n" +
+                        "</div>\n" +
+                        "<h6 class='post-title'>用户:"+element.uname+"</h6><br>"+
+                        "<div class=\"comment-meta\">\n" +
+                        "<a href=\"#\" class=\"post-date\">时间:"+element.rtime+"</a>\n" +
+                        "<p>内容:"+element.rdetails+"</p>\n" +
+                        "</div>";
+                    $("#bbbbb").append(trStr1);
+                });
+            }
+        })
+    }
+
+    $(function () {
+
+        var qq = $.cookie("uname")
+
+        if (qq == null) {
+            document.getElementById("login").style.display="";//显示
+        }else {
+            document.getElementById("pl").style.display="";//显示
+            $("#name").val(qq)
+        }
+
+
+    })
+
+
+
+
+
+    function addReply() {
+        alert(1);
+        var uname = $.cookie("uname")
+        /*var uname = $("input[ uname='uname' ]").val();*/
+        var rdetails = $("#message").val();
+        $.ajax({
+            type: "post",
+            url:"addReply?uname="+uname+"&rdetails="+rdetails,
+            ContentType: "application/json; charset=utf-8",
+
+            success: function (data) {
+                if(data == 1){
+                    $.cookie('uname',uname)
+                    alert("评论成功")
+                }else{
+                    alert("评论失败")
+                }
+            }
+        })
+    }
+
+
+
+
+
+
+
+</script>
 </body>
 
 </html>
