@@ -20,14 +20,15 @@ public class AmdinsController {
     @RequestMapping(value = "/adminlogin",method = RequestMethod.POST)
     @ResponseBody
     public int login(@RequestParam String admin, @RequestParam String upass){
-        System.out.println("admin"+"11111111111111111111111111111"+"upass");
         Admins login = adminsService.login(admin);
-        System.out.println(login);
-        if (upass.equals(login.getPassword())){
+        if (login == null){
+            return 3;
+        }else if (upass.equals(login.getPassword())){
             return 1;
         }else {
             return 2;
         }
+
     }
 
 }
