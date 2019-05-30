@@ -16,12 +16,14 @@ import java.util.List;
 public class UserController {
     @Resource
     private UserService userService;
+
     //查询所有用户
     @RequestMapping("/getAllUser")
     @ResponseBody
     public List<User> getAllUser(){
         return userService.getAllUser();
     }
+
     //根据uid查询用户信息
     @RequestMapping("/getuidAlluser")
     @ResponseBody
