@@ -7,15 +7,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.annotation.Resource;
 import java.util.List;
 
-/**
- * @Author xiao
- * @Date 2019/5/25 15:57
- */
+
 @RestController
 public class YyGamesController {
-    @Autowired
+    @Resource
     YyGamesService yyGamesService;
 
     @RequestMapping("allYyGames")
@@ -27,6 +25,11 @@ public class YyGamesController {
     public List<YyGames> getOneGame(@RequestParam int yyid){
 
         return yyGamesService.getOneGame(yyid);
+    }
+
+    @RequestMapping("getByName")
+    public List<YyGames> getByName(YyGames yyGames){
+        return yyGamesService.getByName(yyGames);
     }
 
 }

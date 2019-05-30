@@ -6,10 +6,7 @@ import org.apache.ibatis.annotations.Select;
 
 import java.util.List;
 
-/**
- * @Author xiao
- * @Date 2019/5/25 15:53
- */
+
 @Mapper
 public interface YyGamesMapper {
 
@@ -21,6 +18,7 @@ public interface YyGamesMapper {
     @Select("select * from yygames where yyid = #{yyid}")
       List<YyGames> getOneGame( int yyid);
 
-
+    @Select("select * from yygames where yyname=#{yyname}")
+    List<YyGames> getByName(YyGames yyGames);
 
 }
