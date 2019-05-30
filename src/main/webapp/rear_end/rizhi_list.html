@@ -43,21 +43,54 @@
 }
         </style>
 	</head>
-	<body id="pagestyle" class="backgroundf0">
-		<div class="bk-con-message message-section" id="iframe_box">
-			<div class="box-module height100b margin0">
-				<div class="box-title">字体库</div>
-				<div class="box-content padding15">
-				 <table class="suggest">
+	<body>
+	<div class="pages-style" >
+	<div class="operation  mb15">
+		<button class="btn button_btn bg-deep-blue" type="button" onclick=""><i class="iconfont"></i>&nbsp;批量删除</button>
+	</div>
 
-
-                 </table>
-
-
-				</div>
-			</div>
-	   </div>
+	<table class="table" width="200" border="1" id="Datatable">
+		  <tr class="trs">
+			<td width="5%"></td>
+			<td width="10%" ><h2>称呼</h2></td>
+			<td width="15%"><h2>邮箱</h2></td>
+			<td width="20%"><h2>主题</h2></td>
+			<td width="30%"><h2>留言</h2></td>
+			<td width="20">操作</td>
+		  </tr>
+	</table>
+	</div>
+	<script type="text/javascript">
+		$.ajax({
+			type:"get",
+			url:"../getAllKeFu",
+			dataType:"json",
+			success:function (data) {
+				$.each(data,function (index,element) {
+					var trStr =
+						"<tr>"+
+						"<td>"+"<input type='checkbox'>"+"</td>"+
+						"<td >"+element.kname+"</td>" +
+						"<td >"+element.email+"</td>" +
+						"<td '>"+element.theme+"</td>" +
+						"<td '>"+element.suggest+"</td>"+
+						"<td>"+
+						"<button class=\"btn button_btn bg-deep-blue\" >删除</button>\n" +
+						"</td>"+
+						"</tr>"
+					$("#Datatable").append(trStr);
+				})
+			}
+		})
+	</script>
 	</body>
+
+
+
+
+
+
+
 </html>
 <script>
 	//内页框架
