@@ -22,7 +22,7 @@ public class KeFuController {
     @RequestMapping("addKeFu")
     @ResponseBody
     public int addKeFu(@RequestBody KeFu keFu){
-
+        System.out.println(keFu+"111111111111111111");
         keFuService.addKeFu(keFu);
         return 1;
     }
