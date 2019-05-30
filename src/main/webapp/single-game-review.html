@@ -31,7 +31,6 @@
 
     <!-- ##### Header Area Start ##### -->
     <header class="header-area wow fadeInDown" data-wow-delay="500ms">
-        <!-- 前头部区域 -->
         <div class="top-header-area">
             <div class="container h-100">
                 <div class="row h-100 align-items-center">
@@ -51,11 +50,11 @@
                                 </form>
                             </div>
                             <!-- Login Area -->
-                            <div class="login-area">
-                                <a href="#"><span>登陆</span> <i class="fa fa-lock" aria-hidden="true"></i></a>
+                            <div id="uname1" class="login-area" style="display: none;">
+                                <a href="login.html"><span id="uname2">登陆</span><i class="fa fa-lock" aria-hidden="true"></i></a>
                             </div>
-                             <div class="login-area">
-                                <a href="#"><span>注册</span> <i class="fa fa-lock" aria-hidden="true"></i></a>
+                            <div id="uname3" class="login-area" style="display: none;">
+                                <a href="#">欢迎你:&nbsp;&nbsp;&nbsp;<span id="uname4"></span> <i class="fa fa-lock" aria-hidden="true"></i></a>
                             </div>
                         </div>
                     </div>
@@ -296,7 +295,16 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> - Col
 
 
     })
+    $(function () {
+        var aa = $.cookie("uname")
+        if(aa == null){
+            document.getElementById("uname1").style.display="";//显示
+        }else {
+            document.getElementById("uname3").style.display="";//显示
+            document.getElementById("uname4").innerHTML = aa;
 
+        }
+    })
 </script>
 
 </body>
