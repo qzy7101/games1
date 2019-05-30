@@ -330,20 +330,20 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> - Col
 <script type="text/javascript">
 
     function load() {
-
+        alert(1);
         var kefu=Object();
             kefu.kname= $("input[name='t1']").val();
             kefu.email= $("input[name='t2']").val();
             kefu.theme= $("input[name='t3']").val();
             kefu.suggest= $("input[name='message']").val();
 
-
+            alert(kefu);
 
         console.log(kefu);
 
             $.ajax({
-                type: 'GET',
-                url: 'addKeFu',
+                type: "GET",
+                url: "addKeFu",
                 async:false,
                 data:JSON.stringify(kefu),
                 contentType:'application/json;charset=utf-8',
