@@ -8,7 +8,7 @@ public class YyGames {
     String yyjj;
     String yyphoto;
     String yyvido;
-    String yytype;
+    String gametype;
 }
 
 

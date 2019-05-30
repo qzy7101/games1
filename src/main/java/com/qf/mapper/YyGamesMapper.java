@@ -18,7 +18,7 @@ public interface YyGamesMapper {
     @Select("select * from yygames where yyid = #{yyid}")
       List<YyGames> getOneGame( int yyid);
 
-    @Select("select * from yygames where yyname=#{yyname}")
-    List<YyGames> getByName(YyGames yyGames);
+    @Select("select * from yygames where gametype=#{gametype}")
+    List<YyGames> getByName(String gametype);
 
 }

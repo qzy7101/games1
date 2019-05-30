@@ -7,6 +7,6 @@ public interface YyGamesService {
 
     List<YyGames> getOneGame( int yyid);
 
-    List<YyGames> getByName(YyGames yyGames);
+    List<YyGames> getByName(String gametype);
 }
 

@@ -26,7 +26,7 @@ public class YyGamesServiceImpl implements YyGamesService {
     }
 
     @Override
-    public List<YyGames> getByName(YyGames yyGames) {
-        return yyGamesMapper.getByName(yyGames);
+    public List<YyGames> getByName(String gametype) {
+        return yyGamesMapper.getByName(gametype);
     }
 }

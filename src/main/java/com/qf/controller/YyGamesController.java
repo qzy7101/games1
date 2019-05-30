@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 
@@ -28,8 +29,10 @@ public class YyGamesController {
     }
 
     @RequestMapping("getByName")
-    public List<YyGames> getByName(YyGames yyGames){
-        return yyGamesService.getByName(yyGames);
+    public List<YyGames> getByName(String gametype){
+
+        System.out.println(gametype+"1111111111111111111111111111");
+        return yyGamesService.getByName(gametype);
     }
 
 }

@@ -14,6 +14,7 @@
     <!-- Favicon -->
     <link rel="icon" href="img/core-img/favicon.ico">
 
+
     <!-- Stylesheet -->
     <link rel="stylesheet" href="style.css">
 
@@ -88,14 +89,14 @@
                                 <ul>
                                     <li><a href="index.html">主页</a></li>
                                     <li><a href="game-review.html">游戏库</a></li>
-                                    <li ><a href="#">分类</a>
+                                    <li><a href="#">分类</a>
                                         <ul class="dropdown">
-                                            <li ><a href="#"onclick="type1()">策略</a></li>
-                                            <li><a href="#" onclick="type2()">角色扮演</a></li>
-                                            <li><a href="#" onclick="type3()">竞速</a></li>
-                                            <li><a href="#" onclick="type4()">体育</a></li>
-                                            <li><a href="#" onclick="type5()">冒险</a></li>
-                                            <li><a href="#" onclick="type6()">休闲</a></li>
+                                            <li><a href="#" onclick="typeone()">策略</a></li>
+                                            <li><a href="#">角色扮演</a></li>
+                                            <li><a href="#">竞速</a></li>
+                                            <li><a href="#">体育</a></li>
+                                            <li><a href="#">冒险</a></li>
+                                            <li><a href="#">休闲</a></li>
                                         </ul>
                                     </li>
                                     <li><a href="post.html">社区</a></li>
@@ -267,11 +268,12 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> - Col
 
     <script>
     $(function () {
+        var gametype = $.cookie("gametypeone");
 
-
+        alert(gametype)
         $.ajax({
             type: "GET",
-            url: "allYyGames",
+            url:"getByName?gametype="+gametype,
             async: false,
             success: function (data) {
                 $("#video-tabContent").html(data)
@@ -309,41 +311,6 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> - Col
     }
 
 
-
-
-</script>
-<script type="text/javascript">
-    // var a = window.location.search.split("=")[gametype]
-      function type1(){
-          var aa = "策略";
-          $.cookie("gametypeone",aa);
-           window.location.href="GameType.html";
-      }
-    function type2() {
-        var bb = "角色扮演";
-        $.cookie("gametypeone",bb);
-        window.location.href="GameType.html";
-    }
-    function type3() {
-        var cc = "竞速";
-        $.cookie("gametypeone",cc);
-        window.location.href="GameType.html";
-    }
-    function type4() {
-        var ee = "体育";
-        $.cookie("gametypeone",ee);
-        window.location.href="GameType.html";
-    }
-    function type5() {
-        var dd = "冒险";
-        $.cookie("gametypeone",dd);
-        window.location.href="GameType.html";
-    }
-    function type6() {
-        var ee = "休闲";
-        $.cookie("gametypeone",ee);
-        window.location.href="GameType.html";
-    }
 </script>
 </body>
 
