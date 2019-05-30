@@ -80,12 +80,16 @@
 									<h4 class="title_name"><img src="images/login_title.png" /></h4>
 									<fieldset>
 										<ul>
-											<li class="frame_style form_error"><label class="user_icon iconfont">&#xe620;</label><input name="" type="text" data-name="用户名" id="username" /><i>用户名</i></li>
-											<li class="frame_style form_error"><label class="password_icon iconfont">&#xe625;</label><input name="" type="password" data-name="密码" id="userpwd" /><i>密码</i></li>
-											<li class="frame_style form_error"><label class="Codes_icon iconfont">&#xe624;</label><input name="" type="text" data-name="验证码" id="Codes_text" /><i>验证码</i>
-												<div class="Codes_region"><img src="images/yanzhengma.png" width="100%" height="38px"></div>
+											<li class="frame_style form_error"><label class="user_icon iconfont">&#xe620;</label><input name="username" type="text"  id="username" /></li>
+											<div id="username1"></div>
+											<li class="frame_style form_error"><label class="password_icon iconfont">&#xe625;</label><input name="password" type="password"  id="password" /></li>
+											<div id="password1"></div>
+											<li class="frame_style form_error"><label class="Codes_icon iconfont">&#xe624;</label><input name="yzm"  type="text"  id="Codes_text" />
+												<div class="Codes_region"><div id="checkCode" style="font-size: 15px" class="code"  onclick="createCode(4)" ></div></div>
+												<div id="yzm1"></div>
 											</li>
 										</ul>
+										<br>
 										<div class="space"></div>
 										<div class="clearfix">
 											<label class="inline">
@@ -114,51 +118,106 @@
 	</body>
 </html>
 <script type="text/javascript">
-	//验证登录
-	$(document).ready(function() {	
-		$("input[type='text'],input[type='password']").blur(function() {
-			var $el = $(this);
-			var inputname=0;
-			var $parent = $el.parent();
-			$parent.attr('class', 'frame_style').removeClass(' form_error');
-			if($el.val() == '') {
-				var name=$el.attr("data-name");
-				$parent.attr('class', 'frame_style').addClass(' form_error form_prompt');
-				$parent.find('i').eq(inputname).html(name+"不能为空").addClass("prompt");
+
+	var q1 = 1;
+	var q2 = 1;
+	var q3 = 1;
+
+
+    //用户名正则验证
+	$("#username").blur(function () {
+		var uname = $(" input[ name='username' ] ").val()
+		var reg=/^[a-zA-Z][a-zA-Z0-9]{3,9}$/;
+		if(uname.length>0){
+			if(reg.test(uname)==false) {
+				document.getElementById("username1").innerHTML = "字母开头，4到10位";
+			}else {
+				document.getElementById("username1").innerHTML = "输入正确！";
+				q1 = 2;
 			}
-		});
-		$("input[type='text'],input[type='password']").focus(function() {
-			var $el = $(this);
-			var $parent = $el.parent();
-			if($el.val() == '') {
-				$parent.attr('class', 'frame_style').addClass(' form_errors');
-			} else {
-				$parent.attr('class', 'frame_style').removeClass(' form_errors');
-			}
-		});
-	  $('#login_btn').on('click', function() {
-		var num = 0;
-		var str = "";
-		$("input[type$='text'],input[type$='password']").each(function(n) {
-			var $el = $(this);		
-			var inputname=0;
-			var $parent = $el.parent();
-			if($el.val() == "") {
-				var name=$el.attr("data-name");
-				$parent.attr('class', 'frame_style').addClass(' form_error form_prompt');
-                 $parent.find('i').eq(inputname).html(name+"不能为空").addClass("prompt");
-				num++;
-				return false;
-			}
-		});
-		if(num > 0) {
-			return false;
-		} else {
-			//ajax 判断用户名是否存在
-			location.href = "index.html";
+		}else {
+			document.getElementById("username1").innerHTML = "用户名不能为空";
 		}
-	});
 	})
+
+	//密码正则验证
+	$("#password").blur(function () {
+		var upass = $(" input[ name='password' ] ").val()
+		var reg=/^[a-zA-Z0-9]{4,10}$/;
+		if(upass.length>0){
+			if(reg.test(upass)==false) {
+				document.getElementById("password1").innerHTML = "4到10位,不能含有非法字符";
+			}else {
+				document.getElementById("password1").innerHTML = "输入正确！";
+				q2 = 2;
+			}
+		}else {
+			document.getElementById("password1").innerHTML = "密码不能为空";
+		}
+	})
+
+
+	//页面加载时，生成随机验证码
+	window.onload=function(){
+		createCode(4);
+	}
+
+	//检查验证码是否正确
+	$("#Codes_text").blur(function () {
+		validateCode();
+	})
+
+    //对比验证码
+	function validateCode() {
+		//获取显示区生成的验证码
+		var checkCode = document.getElementById("checkCode").innerHTML;
+		//获取输入的验证码
+		var inputCode = document.getElementById("Codes_text").value;
+		//console.log(checkCode);
+		//console.log(inputCode);
+		if (inputCode.length < 1) {
+			document.getElementById("yzm1").innerHTML = "验证码不能为空";
+		} else if (inputCode.toUpperCase() != checkCode.toUpperCase()) {
+			document.getElementById("yzm1").innerHTML = "验证码输入有误";
+			createCode(4);
+		} else {
+			document.getElementById("yzm1").innerHTML = "验证码正确";
+			q3 = 2;
+		}
+	}
+
+	//登陆
+	$("#login_btn").on("click",function(){
+
+		if (q1 > 1 && q2 > 1 && q3 > 1) {
+			login();
+		}else {
+			document.getElementById("yzm1").innerHTML = "账号或密码错误";
+		}
+
+	})
+
+	//登陆函数
+	function login(){
+
+		var admin = $(" input[ name='username' ] ").val();
+		var upass = $("input[name='password']").val();
+		$.ajax({
+			type:"post",
+			url:"../adminlogin?admin="+admin+"&upass="+upass,
+			contentType: "application/json; charset=utf-8",
+			success:function(data){
+				if(data == 1){
+					$.cookie('admin',admin)
+					window.location = "index.html";
+				}else {
+					document.getElementById("register1").innerHTML = "账号或密码错误";
+				}
+			}
+		})
+	}
+
+
 	//框架设置
 	$(function() {
 		$("#loginstyle").BKframe({
@@ -166,4 +225,35 @@
                
 		})
 	});
+
+
+	//生成验证码的方法
+	function createCode(length) {
+		var code = "";
+		var codeLength = parseInt(length); //验证码的长度
+		var checkCode = document.getElementById("checkCode");
+		////所有候选组成验证码的字符，当然也可以用中文的
+		var codeChars = new Array(0, 1, 2, 3, 4, 5, 6, 7, 8, 9,
+				'a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z',
+				'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z');
+		//循环组成验证码的字符串
+		for (var i = 0; i < codeLength; i++)
+		{
+			//获取随机验证码下标
+			var charNum = Math.floor(Math.random() * 62);
+			//组合成指定字符验证码
+			code += codeChars[charNum];
+		}
+		if (checkCode)
+		{
+			//为验证码区域添加样式名
+			checkCode.className = "code";
+			//将生成验证码赋值到显示区
+			checkCode.innerHTML = code;
+		}
+	}
+
+
+
+
 </script>
