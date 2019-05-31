@@ -6,4 +6,6 @@ public interface AdminsService {
 
     Admins login(String admin);
 
+    void upadmin(Admins admins);
+
 }

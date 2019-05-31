@@ -17,9 +17,16 @@
     <!-- Stylesheet -->
     <link rel="stylesheet" href="style.css">
 
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/classy-nav.css">
+    <link rel="stylesheet" href="layui/css/layui.css"  media="all">
+    <script src="layui/layui.js" charset="utf-8"></script>
+    <script src="rear_end/js/jquery.cookie.js"></script>
+
 </head>
 
 <body>
+
     <!-- Preloader -->
     <div class="preloader d-flex align-items-center justify-content-center">
         <div class="spinner">
@@ -31,37 +38,36 @@
 
     <!-- ##### Header Area Start ##### -->
    <header class="header-area wow fadeInDown" data-wow-delay="500ms">
-        <!-- 前头部区域 -->
-        <div class="top-header-area">
-            <div class="container h-100">
-                <div class="row h-100 align-items-center">
-                    <div class="col-12 d-flex align-items-center justify-content-between">
-                        <!-- 标识区域 -->
-                        <div class="logo">
-                            <a href="index.html"><img src="img/core-img/logo.png" alt=""></a>
-                        </div>
+       <div class="top-header-area">
+           <div class="container h-100">
+               <div class="row h-100 align-items-center">
+                   <div class="col-12 d-flex align-items-center justify-content-between">
+                       <!-- 标识区域 -->
+                       <div class="logo">
+                           <a href="index.html"><img src="img/core-img/logo.png" alt=""></a>
+                       </div>
 
-                        <!-- 搜索及登入区 -->
-                        <div class="search-login-area d-flex align-items-center">
-                            <!-- 搜索 -->
-                            <div class="top-search-area">
-                                <form action="#" method="post">
-                                    <input type="search" name="top-search" id="topSearch" placeholder="搜索">
-                                    <button type="submit" class="btn"><i class="fa fa-search"></i></button>
-                                </form>
-                            </div>
-                            <!-- Login Area -->
-                            <div class="login-area">
-                                <a href="#"><span>登陆</span> <i class="fa fa-lock" aria-hidden="true"></i></a>
-                            </div>
-                             <div class="login-area">
-                                <a href="#"><span>注册</span> <i class="fa fa-lock" aria-hidden="true"></i></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+                       <!-- 搜索及登入区 -->
+                       <div class="search-login-area d-flex align-items-center">
+                           <!-- 搜索 -->
+                           <div class="top-search-area">
+                               <form action="#" method="post">
+                                   <input type="search" name="top-search" id="topSearch" placeholder="搜索">
+                                   <button type="submit" class="btn"><i class="fa fa-search"></i></button>
+                               </form>
+                           </div>
+                           <!-- Login Area -->
+                           <div id="uname1" class="login-area" style="display: none;">
+                               <a href="login.html"><span id="uname2">登陆</span><i class="fa fa-lock" aria-hidden="true"></i></a>
+                           </div>
+                           <div id="uname3" class="login-area" style="display: none;">
+                               <a href="#">欢迎你:&nbsp;&nbsp;&nbsp;<span id="uname4"></span> <i class="fa fa-lock" aria-hidden="true"></i></a>
+                           </div>
+                       </div>
+                   </div>
+               </div>
+           </div>
+       </div>
 
         <!-- 导航区 -->
         <div class="egames-main-menu" id="sticker">
@@ -112,7 +118,7 @@
     </header>
     <!-- ##### Header Area End ##### -->
 
-  
+
     <!-- ##### Articles Area Start ##### -->
     <section class="articles-area section-padding-0-100">
         <div class="container">
@@ -121,24 +127,23 @@
                 <div class="col-12 col-lg-8">
                     <div class="mt-100">
 
+                        <button id="btn1" data-method="confirmTrans" class="layui-btn" onclick="fuck()" style="display: block;">发帖</button>
+                        <button id="btn2" data-method="confirmTrans" class="layui-btn" onclick="fuck2()" style="display:none;">去登录</button>
+
                         <!-- *** Single Articles Area *** -->
-                        <div class="single-articles-area d-flex flex-wrap mb-30">
-                            <div class="article-thumbnail">
-                                <img src="img/bg-img/6.jpg" alt="">
-                            </div>
-
-
-                            <div class="article-content">
-                                <a href="single-post.html" class="post-title"></a>
-                                <div class="post-meta">
-                                    <div style="float: left;">发布者：</div>
-                                    <div>点击量：</div>
-                                    <div>发布时间</div>
-                                </div>
-                                <p>内容： ---------------------------------------</p>
-                            </div>
-
-
+                        <div class="single-articles-area d-flex flex-wrap mb-30" id="aaaa">
+                            <!--<div class="article-thumbnail">-->
+                                <!--<img src="img/bg-img/6.jpg" alt="">-->
+                            <!--</div>-->
+                            <!--<div class="article-content" id="dataTablea">-->
+                                <!--<a href="single-post.html" class="post-title">评论标题</a>-->
+                                <!--<div class="post-meta">-->
+                                    <!--<div style="float: left;">发布者：</div>-->
+                                    <!--<div>点击量：</div>-->
+                                    <!--<div>发布时间</div>-->
+                                <!--</div>-->
+                                <!--<p>内容： -&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;</p>-->
+                            <!--</div>-->
                         </div>
 
                        
@@ -357,6 +362,160 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> - Col
     <script src="js/plugins/plugins.js"></script>
     <!-- Active js -->
     <script src="js/active.js"></script>
-</body>
+<script>
+    $(function () {
 
+        $.ajax({
+            type: "get",
+            url: "../Community",
+            async: false,
+            ContentType: "application/json; charset=utf-8",
+
+            success: function (data) {
+                $("#aaaa").empty();
+                $.each(data, function (index, element) {
+
+                    var trStr =
+                     "<div class=\"article-thumbnail\">\n" +
+                        "                                <img src=\"img/bg-img/6.jpg\" alt=\"\">\n" +
+                        "                            </div>\n" +
+                        "                            <div class=\"article-content\" id=\"dataTablea\">\n" +
+                        "                                <div id='aaa' onclick='one(this)' href='#' class=\"post-title\">"+element.cheadline+"</div>\n" +
+                        "                                <div class=\"post-meta\">\n" +
+                        "                                    <div>发布者："+element.uname+"</div>\n" +
+                        "                                    <div>点击量："+element.hits+"</div>\n" +
+                        "                                    <div>发布时间："+element.pubdate+"</div>\n" +
+                        "                                </div>\n" +
+                        "                                <p>内容："+element.details+"</p>\n" +
+                        "                            </div>";
+                    $("#aaaa").append(trStr);
+
+
+                });
+            }
+        });
+    });
+
+
+    function one(a) {
+        var as = $(a).text();
+
+alert(as);
+
+
+        $.ajax({
+            type: "post",
+            url:"one?as="+as,
+            ContentType: "application/json; charset=utf-8",
+            success: function (data) {
+
+                if (data == 1) {
+                    window.location.href = "./single-post.html";
+                }
+            }
+        })
+    }
+
+
+
+</script>
+
+    <div id="test" style="background-: #fffafe;width:300px;height:400px;">
+           <br>
+        <div class="layui-form-item">
+            <label class="layui-form-label">姓名</label>
+            <div class="layui-input-block">
+                <input type="text" name="title" required  lay-verify="required"  autocomplete="off" class="layui-input">
+            </div>
+        </div>
+
+        <div class="layui-form-item">
+            <label class="layui-form-label">标题</label>
+            <div class="layui-input-block">
+                <input type="text" name="title" required  lay-verify="required"  autocomplete="off" class="layui-input">
+            </div>
+        </div>
+
+        <div class="layui-form-item layui-form-text">
+            <label class="layui-form-label">内容</label>
+            <div class="layui-input-block">
+                <textarea placeholder="请输入内容" class="layui-textarea" name="desc"></textarea>
+            </div>
+        </div>
+
+        <div>
+            <center>
+            <button class="layui-btn layui-btn-normal" onclick="addCommunity()">提交</button>
+            </center>
+        </div>
+
+
+    </div>
+
+    <script>
+        function one(a) {
+            var as = $(a).text();
+            alert(as);
+            $.ajax({
+                type: "post",
+                url:"../addCommunity",
+                ContentType: "application/json; charset=utf-8",
+                success: function (data) {
+
+                    if (data == 1) {
+                        window.location.href = "./single-post.html";
+                    }
+                }
+            })
+        }
+
+    </script>
+
+    <script>
+
+        function fuck(){
+        layui.use('layer',function(){
+            var layer=layui.layer;
+            layer.open({
+                type:1,
+                content:$("#test")
+            })
+        })
+    }
+
+
+    //  block 显示 none隐藏
+    //   $("#btn2").attr("style","display:none ;");
+    //   $("#btn1").attr("style","display:block;");
+
+    $(function () {
+        var aa = $.cookie("uname")
+        alert(aa)
+        if (aa == null) {
+
+        }else {
+            $("#btn2").attr("style","display:none ;");
+            $("#btn1").attr("style","display:block;");
+        }
+    })
+
+
+        function fuck2() {
+            window.location = "./login.html";
+        }
+
+        $(function () {
+            var aa = $.cookie("uname")
+            if(aa == null){
+                document.getElementById("uname1").style.display="";//显示
+            }else {
+                document.getElementById("uname3").style.display="";//显示
+                document.getElementById("uname4").innerHTML = aa;
+
+            }
+        })
+    </script>
+
+
+</body>
 </html>

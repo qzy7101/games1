@@ -19,6 +19,17 @@
 		<script src="js/jquery.cookie.js" type="text/javascript"></script>
 		<script src="js/jquery.nicescroll.js" type="text/javascript"></script>
 		<script src="js/HUpages.js" type="text/javascript"></script>
+		<link rel="stylesheet" href="../layui/css/layui.css"  media="all">
+		<script src="../layui/layui.js" charset="utf-8"></script>
+		<script src="../rear_end/layer-v3.1.1/layer/layer.js"></script>
+<style>
+
+	#btn3{
+        float:right;
+	}
+
+</style>
+
 	</head>
 	<body id="pagestyle" class="backgrounddd">
 		 <div class="bk-con-message message-section" id="iframe_box">
@@ -33,9 +44,9 @@
 						<div class="col-lg-6 padding15">
 						   <div class="box-module boxcolor">
 						   <div class="box-title btn-green clickBombbox selected" data-type="arrow">个人信息<i class="iconfont icon-35_xiangxiajiantou arrow"></i></div>
-						   <div class="box-content padding15 text-center Bombbox">
+						   <div id="box1" class="box-content padding15 text-center Bombbox">
 
-                          </div>
+						   </div>
 						   </div>
 						</div>
 
@@ -43,7 +54,28 @@
 						   <div class="box-module boxcolor">
 						   <div class="box-title btn-blue clickBombbox selected" data-type="arrow">权限更改 <i class="iconfont icon-35_xiangxiajiantou arrow"></i></div>
 						   <div class="box-content padding15 text-center Bombbox" >
-
+							   <!--修改密码弹出层-->
+							   <div id="test" style="background-: #fffafe;width:300px;height:318px; display: none">
+								   <br>
+								   <div class="layui-form-item">
+									   输入新密码
+									   <div class="layui-input-block">
+										   <input id="pass1" type="password" name="pass1" required  lay-verify="required"  autocomplete="off" class="layui-input">
+									   </div>
+								   </div>
+								   <div class="layui-form-item">
+									   确认新密码
+									   <div class="layui-input-block">
+										   <input id="pass2" type="password" name="pass2" required  lay-verify="required"  autocomplete="off" class="layui-input">
+									   </div>
+								   </div>
+								   <div id="ts"></div>
+								   <div>
+									   <center>
+										   <button class="layui-btn layui-btn-normal" onclick="uppass()">提交</button>
+									   </center>
+								   </div>
+							   </div>
                           </div>
 						   </div>
 						</div>
@@ -51,8 +83,11 @@
 				</div>
 			</div>
 	    </div>
+
+
 	</body>
 </html>
+
 <script>
 	$(function() {
 		$("#pagestyle").Hupage({
@@ -72,4 +107,158 @@
 			}
 		})
 	})
+	
+	//更改信息点击事件
+	function update() {
+		//block 显示 none隐藏
+			$("#btn1").attr("style","display:none;");
+		    $("#btn2").attr("style","display:block ;");
+		    $('#ip1').prop("disabled", false);
+		    $('#ip2').prop("disabled", false);
+		    $('#ip3').prop("disabled", false);
+	     	$('#ip4').prop("disabled", false);
+	     	$('#ip5').prop("disabled", false);
+	}
+
+
+	//确定更改点击事件
+	function qued() {
+
+		var r=confirm("是否确定更改信息!");
+		if (r==true){
+			var admininfo = Object();
+			admininfo.admin = $.cookie("admin")
+			admininfo.name = $(" input[ name='name' ] ").val();
+			admininfo.phone = $(" input[ name='phone' ] ").val();
+			admininfo.site = $(" input[ name='site' ] ").val();
+			admininfo.position = $(" input[ name='position' ] ").val();
+			admininfo.synopsis = $(" input[ name='synopsis' ] ").val();
+			$.ajax({
+				type:"post",
+				url:"../adminupdata",
+				data:JSON.stringify(admininfo),
+				contentType: "application/json; charset=utf-8",
+				success:function(data){
+					if (data == 1) {
+						alert("ok")
+					}else {
+						alert("no")
+					}
+				}
+			})
+			alert("ok")
+		}
+		else{
+		  alert("no")
+		}
+
+		//block 显示 none隐藏
+		$("#btn2").attr("style","display:none ;");
+		$("#btn1").attr("style","display:block;");
+		$('#ip1').prop("disabled", true);
+		$('#ip2').prop("disabled", true);
+		$('#ip3').prop("disabled", true);
+		$('#ip4').prop("disabled", true);
+		$('#ip5').prop("disabled", true);
+
+	}
+
+   //页面加载使input无法编辑
+	$(function () {
+
+		//根据admin的值获取个人信息数据
+		var admin = $.cookie("admin")
+
+		$.ajax({
+			type:"GET",
+			url:"../gexx?admin="+admin,
+			contentType: "application/json; charset=utf-8",
+
+			success: function (data) {
+				// $("#video-tabContent").html(data)
+				$.each(data, function (index, element) {
+					var trStr =
+							" <div class=\"layui-form-item\">\n" +
+							" <label class=\"layui-form-label\">姓名</label>\n" +
+							" <div class=\"layui-input-block\">\n" +
+							" <input id=\"ip1\" type=\"text\" name=\"name\" required  lay-verify=\"required\"value=\""+element.name+"\"  autocomplete=\"off\" class=\"layui-input\">\n" +
+							" </div>\n" +
+							" </div>\n" +
+							" <div class=\"layui-form-item\">\n" +
+							" <label class=\"layui-form-label\">电话</label>\n" +
+							" <div class=\"layui-input-block\">\n" +
+							" <input id=\"ip2\" type=\"text\" name=\"phone\" required  lay-verify=\"required\" value=\""+element.phone+"\" autocomplete=\"off\" class=\"layui-input\">\n" +
+							" </div>\n" +
+							" </div>\n" +
+							" <div class=\"layui-form-item\">\n" +
+							" <label class=\"layui-form-label\">住址</label>\n" +
+							" <div class=\"layui-input-block\">\n" +
+							" <input id=\"ip3\" type=\"text\" name=\"site\" required  lay-verify=\"required\" value=\""+element.site+"\" autocomplete=\"off\" class=\"layui-input\">\n" +
+							" </div>\n" +
+							" </div>\n" +
+							" <div class=\"layui-form-item\">\n" +
+							" <label class=\"layui-form-label\">权限</label>\n" +
+							" <div class=\"layui-input-block\">\n" +
+							" <input id=\"ip4\" type=\"text\" name=\"position\" required  lay-verify=\"required\" value=\""+element.position+"\" autocomplete=\"off\" class=\"layui-input\">\n" +
+							" </div>\n" +
+							" </div>\n" +
+							" <div class=\"layui-form-item\">\n" +
+							" <label class=\"layui-form-label\">简介</label>\n" +
+							" <div class=\"layui-input-block\">\n" +
+							" <input id=\"ip5\" type=\"text\" name=\"synopsis\" required  lay-verify=\"required\" value=\""+element.synopsis+"\" autocomplete=\"off\" class=\"layui-input\">\n" +
+							"</div>\n" +
+							"</div>\n" +
+							"<div><button id=\"btn1\" onclick=\"update()\" class=\"layui-btn layui-btn-normal layui-btn-radius\" style=\"display: block;\">更改信息</button>\n" +
+							"<button id=\"btn2\" type=\"button\" data-method=\"offset\" data-type=\"auto\" onclick=\"qued()\" class=\"layui-btn layui-btn-normal layui-btn-radius\" style=\"display: none;\">确认更改</button>\n" +
+							"<button id=\"btn3\" onclick=\"upmm()\" class=\"layui-btn layui-btn-normal layui-btn-radius\">更改密码</button></div>\n";
+					$("#box1").append(trStr);
+
+				});
+				$('#ip1').prop("disabled", true);
+				$('#ip2').prop("disabled", true);
+				$('#ip3').prop("disabled", true);
+				$('#ip4').prop("disabled", true);
+				$('#ip5').prop("disabled", true);
+
+			}
+		})
+	})
+
+	function upmm() {
+         alert("11111111")
+		layui.use('layer',function(){
+			var layer=layui.layer;
+			layer.open({
+				type:1,
+				content:$("#test")
+			})
+		})
+
+
+	}
+
+	function uppass() {
+		var admin = $.cookie("admin")
+		var pass1 = $(" input[ name='pass1' ] ").val();
+		var pass2 = $("input[name='pass2']").val();
+
+		if (pass1 == pass2){
+
+			$.ajax({
+				type:"post",
+				url:"../adminpassword?admin="+admin+"&pass="+pass2,
+				contentType: "application/json; charset=utf-8",
+				success:function(data){
+					if (data == 1) {
+						document.getElementById("ts").innerHTML = "修改成功";
+					}
+				}
+			})
+
+		} else {
+			document.getElementById("ts").innerHTML = "密码不一致";
+		}
+	}
+
+
 </script>

@@ -16,4 +16,9 @@ public class AdminsServiceImpl implements AdminsService {
     public Admins login(String admin) {
         return adminsMapper.login(admin);
     }
+
+    @Override
+    public void upadmin(Admins admins) {
+        adminsMapper.upadmin(admins);
+    }
 }

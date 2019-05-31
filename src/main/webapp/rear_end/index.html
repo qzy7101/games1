@@ -42,8 +42,8 @@
             </div>
             <div class="bk-settings-section">
                 <div class="headerUser">
-                    <a class="user-info clickBombbox" href="javascript:void(0)" data-position="bottom"
-                       data-type="arrow"> 欢迎你,超级管理员 <i class="iconfont icon-iconfonticontrianglecopy"></i></a>
+                    <a id="admin" class="user-info clickBombbox" href="javascript:void(0)" data-position="bottom"
+                       data-type="arrow"> <i class="iconfont icon-iconfonticontrianglecopy"></i></a>
                     <div class="Bombbox">
                         <ul class="usercz menulist">
                             <li class="column-name">
@@ -359,4 +359,16 @@
                 location.href = "login.html";
             });
     }
+
+    $(function () {
+
+        var aa = $.cookie("admin")
+        var aObj = document.getElementById("admin");
+        aObj.innerText = "欢迎您"+aa;
+
+    })
+
+
+
+
 </script>
