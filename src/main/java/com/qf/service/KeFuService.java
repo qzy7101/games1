@@ -10,4 +10,6 @@ public interface KeFuService {
     void addKeFu(KeFu keFu);
 
     void upKeFu(KeFu keFu);
+
+    int delKeFu(int kid);
 }

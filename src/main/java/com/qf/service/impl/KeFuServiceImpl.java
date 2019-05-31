@@ -28,5 +28,10 @@ public class KeFuServiceImpl implements KeFuService {
         keFuMapper.upKeFu(keFu);
     }
 
+    @Override
+    public int delKeFu(int kid) {
+        return keFuMapper.delKeFu(kid);
+    }
+
 
 }
