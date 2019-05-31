@@ -15,7 +15,7 @@ public interface AdminsinfoMapper {
     @Select("select * from adminsinfo where admin = #{admin}")
     List<Admininfo> login(String admin);
 
-    //修改         vid = {#vid}    admin=#{admin}
+    //修改
     @Update("update adminsinfo set aid=#{aid},admin=#{admin},phone=#{phone},site=#{site},position=#{position},synopsis=#{synopsis} where vid = #{vid}")
     void upadmininfo(Admininfo admininfo);
 
