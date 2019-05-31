@@ -32,4 +32,10 @@ public class KeFuController {
     public void upKeFu(KeFu keFu){
         keFuService.upKeFu(keFu);
     }
+
+    @RequestMapping("delKeFu")
+    @ResponseBody
+    public int delKeFu(int kid){
+        return keFuService.delKeFu(kid);
+    }
 }

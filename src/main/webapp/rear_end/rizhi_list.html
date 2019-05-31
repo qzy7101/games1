@@ -42,7 +42,7 @@
     transition: font-size 0.25s ease-out 0s;
 }
         </style>
-	</head>
+	</head>n
 	<body>
 	<div class="pages-style" >
 	<div class="operation  mb15">
@@ -75,13 +75,33 @@
 						"<td '>"+element.theme+"</td>" +
 						"<td '>"+element.suggest+"</td>"+
 						"<td>"+
-						"<button class=\"btn button_btn bg-deep-blue\" >删除</button>\n" +
+						"<button class=\"btn button_btn bg-deep-blue\" onclick='dele("+element.kid+")' >删除</button>\n" +
 						"</td>"+
 						"</tr>"
 					$("#Datatable").append(trStr);
 				})
 			}
 		})
+	</script>
+	<script type="text/javascript">
+		function dele(kid) {
+			alert(kid)
+			var msg=confirm("是否删除？");
+			if(msg==true){
+				$.ajax({
+					type:"POST",
+					url:"../delKeFu?kid="+kid,
+					data:{"kid":kid},
+					success:function (message) {
+						if(message==1){
+							alert("删除成功");
+							window.location.href="rear_end.rizhi_list.html"
+						}
+					}
+				})
+			}
+		}
+
 	</script>
 	</body>
 
