@@ -21,7 +21,7 @@
     <link rel="stylesheet" href="css/classy-nav.css">
     <link rel="stylesheet" href="layui/css/layui.css"  media="all">
     <script src="layui/layui.js" charset="utf-8"></script>
-    <script src="rear_end/js/jquery.cookie.js"></script>
+
 
 </head>
 
@@ -363,6 +363,8 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> - Col
     <script src="js/plugins/plugins.js"></script>
     <!-- Active js -->
     <script src="js/active.js"></script>
+
+    <script src="rear_end/js/jquery.cookie.js"></script>
 <script>
     $(function () {
 
@@ -400,10 +402,7 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> - Col
 
     function one(a) {
         var as = $(a).text();
-
-alert(as);
-
-
+        alert(as);
         $.ajax({
             type: "post",
             url:"one?as="+as,
@@ -433,14 +432,14 @@ alert(as);
         <div class="layui-form-item">
             <label class="layui-form-label">标题</label>
             <div class="layui-input-block">
-                <input type="text" name="title" required  lay-verify="required"  autocomplete="off" class="layui-input">
+                <input type="text" name="title" required id="bt" lay-verify="required"  autocomplete="off" class="layui-input">
             </div>
         </div>
 
         <div class="layui-form-item layui-form-text">
             <label class="layui-form-label">内容</label>
             <div class="layui-input-block">
-                <textarea placeholder="请输入内容" class="layui-textarea" name="desc"></textarea>
+                <textarea placeholder="请输入内容" class="layui-textarea" name="desc" id="message"></textarea>
             </div>
         </div>
 
@@ -454,17 +453,25 @@ alert(as);
     </div>
 
     <script>
-        function one(a) {
-            var as = $(a).text();
-            alert(as);
+        function addCommunity() {
+
+            alert(1);
+            var uname = $.cookie("uname")
+            alert(uname);
+            var cheadline = $("#bt").val();
+            var details = $("#message").val();
             $.ajax({
                 type: "post",
-                url:"../addCommunity",
+                url:"addCommunity?uname="+uname+"&cheadline="+cheadline+"&details="+details,
                 ContentType: "application/json; charset=utf-8",
                 success: function (data) {
 
-                    if (data == 1) {
-                        window.location.href = "./single-post.html";
+                    if(data == 1){
+                        $.cookie('uname',uname)
+                        alert("发帖成功")
+                        window.location = "./post.html";
+                    }else{
+                        alert("发帖失败")
                     }
                 }
             })
@@ -475,6 +482,8 @@ alert(as);
     <script>
 
         function fuck(){
+            alert(1);
+            alert($.cookie("uname"));
         layui.use('layer',function(){
             var layer=layui.layer;
             layer.open({
@@ -490,8 +499,7 @@ alert(as);
     //   $("#btn1").attr("style","display:block;");
 
     $(function () {
-        var aa = $.cookie("uname")
-        alert(aa)
+
         if (aa == null) {
 
         }else {
