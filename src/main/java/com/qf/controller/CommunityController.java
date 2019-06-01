@@ -15,6 +15,8 @@ import javax.servlet.http.HttpSession;
 import java.util.Date;
 import java.util.List;
 
+import static com.sun.tools.doclets.formats.html.markup.HtmlStyle.details;
+
 @RestController
 public class CommunityController {
     @Resource
@@ -30,13 +32,16 @@ public class CommunityController {
         return communityService.getAllCommunity();
     }
 
-    @GetMapping("/addCommunity")
-    public int addCommunity(Community community){
-        community.setCheadline("dsvfdb");
-        community.setUname("刘备");
-        community.setHits(43);
+    @PostMapping("/addCommunity")
+    public int addCommunity(@RequestParam String uname,@RequestParam String cheadline, @RequestParam String details, Community community,HttpSession session){
+        System.out.println(uname);
+        System.out.println(cheadline);
+        System.out.println(details);
         community.setPubdate(new Date());
-        community.setDetails("阿凡达的功能");
+        community.setUname(uname);
+        community.setCheadline(cheadline);
+        System.out.println(community.toString());
+        community.setDetails(details);
         communityService.addCommunity(community);
         return 1;
     }

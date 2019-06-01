@@ -48,9 +48,22 @@ public class AmdinsController {
 
         System.out.println(admininfo.toString());
         adminsinfoService.upadmininfo(admininfo);
-
         return 1;
     }
 
+    //修改admin密码
+    @RequestMapping(value = "/adminpassword")
+    @ResponseBody
+    public int upadmin(@RequestParam String pass,@RequestParam String admin){
 
+        Admins login = adminsService.login(admin);
+
+        login.setPassword(pass);
+
+        System.out.println(login);
+
+        adminsService.upadmin(login);
+
+        return 1;
+    }
 }

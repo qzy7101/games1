@@ -5,7 +5,7 @@ import java.util.Date;
 public class Reply {
     private int rid;
     private int cid;
-    private String uname;
+    private String rname;
     private Date rtime;
     private String rdetails;
 
@@ -25,12 +25,12 @@ public class Reply {
         this.cid = cid;
     }
 
-    public String getUname() {
-        return uname;
+    public String getRname() {
+        return rname;
     }
 
-    public void setUname(String uname) {
-        this.uname = uname;
+    public void setRname(String rname) {
+        this.rname = rname;
     }
 
     public Date getRtime() {
@@ -54,7 +54,7 @@ public class Reply {
         return "Reply{" +
                 "rid=" + rid +
                 ", cid=" + cid +
-                ", uname='" + uname + '\'' +
+                ", rname='" + rname + '\'' +
                 ", rtime=" + rtime +
                 ", rdetails='" + rdetails + '\'' +
                 '}';

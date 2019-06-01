@@ -1,10 +1,7 @@
 package com.qf.mapper;
 
 import com.qf.pojo.KeFu;
-import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Select;
-import org.apache.ibatis.annotations.Update;
+import org.apache.ibatis.annotations.*;
 
 import java.util.List;
 
@@ -19,4 +16,7 @@ public interface KeFuMapper {
 
     @Update("update kefu set kname=#{kname},email=#{email},theme=#{theme},suggest=#{suggest}  where kid=#{kid}")
     void upKeFu(KeFu keFu);
+
+    @Delete("delete from kefu where kid=#{kid}")
+    int delKeFu(int kid);
 }

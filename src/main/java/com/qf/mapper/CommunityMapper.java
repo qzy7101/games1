@@ -7,7 +7,7 @@ import org.apache.ibatis.annotations.Select;
 import java.util.List;
 @Mapper
 public interface CommunityMapper {
-    @Select("select * from community")
+    @Select("select * from community order by cid desc")
     List<Community> getAllCommunity();
 
     @Select("insert into community (cid, cheadline, uname, hits, pubdate, details) values (#{cid,jdbcType=INTEGER},#{cheadline,jdbcType=VARCHAR},#{uname,jdbcType=VARCHAR},#{hits,jdbcType=INTEGER},#{pubdate,jdbcType=VARCHAR},#{details,jdbcType=VARCHAR})")

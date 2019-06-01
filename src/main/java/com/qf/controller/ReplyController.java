@@ -47,7 +47,7 @@ public class ReplyController {
         Integer cid = (Integer) session.getAttribute("cid");
         reply.setCid(cid);
         reply.setRtime(new Date());
-        reply.setUname(uname);
+        reply.setRname(uname);
         System.out.println(reply.toString());
         reply.setRdetails(rdetails);
 
