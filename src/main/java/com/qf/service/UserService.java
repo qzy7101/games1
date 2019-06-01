@@ -19,4 +19,6 @@ public interface UserService {
     User login(String uname);
 //查询邮箱是否存在a
     User email(String email);
+    //根据用户名查ID
+    int getUidByName(String uname);
 }

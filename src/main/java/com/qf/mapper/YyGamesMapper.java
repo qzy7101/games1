@@ -21,4 +21,11 @@ public interface YyGamesMapper {
     @Select("select * from yygames where gametype=#{gametype}")
     List<YyGames> getByName(String gametype);
 
+    //根据游戏名查ID
+    @Select("select yyid from yygames where yyname = #{yyname}")
+    int getYyidByName(String yyname);
+    //根据Id查游戏
+    @Select("select * from yygames where yyid = #{yyid}")
+    YyGames getGameByYyid( int yyid);
+
 }

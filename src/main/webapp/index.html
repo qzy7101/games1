@@ -100,7 +100,7 @@
                                     </ul>
                                 </li>
                                 <li><a href="post.html">社区</a></li>
-                                <li><a href="single-game-review.html">购物车</a></li>
+                                <li><a href="#" onclick="gamereview()">购物车</a></li>
                                 <li><a href="contact.html">客服</a></li>
                             </ul>
                         </div>
@@ -401,6 +401,14 @@
 
     }
   })
+
+    function gamereview(){
+        var name = $.cookie("uname");
+        alert(name);
+        $.cookie("uname",name);
+        window.location.href="single-game-review.html";
+
+    }
 
 </script>
 </body>

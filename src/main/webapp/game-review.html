@@ -281,7 +281,7 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> - Col
                         "</div>\n" +
                         "<div class=\"game-content\">\n" +
                         "<a onclick=\"xiangqing("+element.yyid+")\" class=\"game-title\">"+element.yyname+"</a>\n" +
-                        "<button>加入购物车</button>\n" +
+                        "<button id='buyGoods'>加入购物车</button>\n" +
                         "<button>立即购买</button>\n" +
                         "<div class=\"game-meta\">\n" +
                         "<a href=\"#\" class=\"game-comments\">￥"+element.yyprice+"</a>\n" +
@@ -302,6 +302,23 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> - Col
 
         });
     })
+
+    $('#buyGoods').on('click', function(){
+        var num=0;
+        var str="";
+        $("input[type$='text'],input[type$='password']").each(function(n){
+            if($(this).val()=="")
+            {
+
+                layer.alert(str+=""+$(this).attr("name")+"不能为空！\r\n",{
+                    title: '提示框',
+                    icon:0,
+                });
+                num++;
+                return false;
+            }
+        });
+        if(num>
 
     function xiangqing(a) {
        window.location.href="single-game-review.html?yyid="+a;

@@ -13,7 +13,7 @@ import java.util.List;
 @Service
 public class CommunityServiceImpl implements CommunityService
 {
-    @Resource
+    @Autowired
     private CommunityMapper communityMapper;
     @Override
     public List<Community> getAllCommunity() {

@@ -49,4 +49,9 @@ public class UserServiceImpl implements UserService {
         return userMapper.email(email);
     }
 
+    @Override
+    public int getUidByName(String uname) {
+        return userMapper.getUidByName(uname);
+    }
+
 }

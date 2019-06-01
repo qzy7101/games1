@@ -31,4 +31,8 @@ public interface UserMapper {
     @Select("select * from user where email = #{email}")
     User email(String email);
 
+    //根据用户名查ID
+    @Select("select uid from user where uname = #{uname}")
+    int getUidByName(String uname);
+
 }

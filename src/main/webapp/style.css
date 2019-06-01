@@ -608,6 +608,12 @@ img {
   color: #20d8da; }
 
 /* :: 7.0 Footer Area CSS */
+
+.gaodu{
+  height:300px;
+
+}
+
 .footer-area {
   position: relative;
   z-index: 1;

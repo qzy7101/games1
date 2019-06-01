@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- The above 4 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+
+    <!-- Title -->
+    <title>游戏库</title>
+
+    <!-- Favicon -->
+    <link rel="icon" href="img/core-img/favicon.ico">
+
+    <!-- Stylesheet -->
+    <link rel="stylesheet" href="style.css">
+
+
+</head>
+
+<body>
+<!-- Preloader -->
+<div class="preloader d-flex align-items-center justify-content-center">
+    <div class="spinner">
+        <div class="bounce1"></div>
+        <div class="bounce2"></div>
+        <div class="bounce3"></div>
+    </div>
+</div>
+
+<!-- ##### Header Area Start ##### -->
+<header class="header-area wow fadeInDown" data-wow-delay="500ms">
+    <div class="top-header-area">
+        <div class="container h-100">
+            <div class="row h-100 align-items-center">
+                <div class="col-12 d-flex align-items-center justify-content-between">
+                    <!-- 标识区域 -->
+                    <div class="logo">
+                        <a href="index.html"><img src="img/core-img/logo.png" alt=""></a>
+                    </div>
+
+                    <!-- 搜索及登入区 -->
+                    <div class="search-login-area d-flex align-items-center">
+                        <!-- 搜索 -->
+                        <div class="top-search-area">
+                            <form action="#" method="post">
+                                <input type="search" name="top-search" id="topSearch" placeholder="搜索">
+                                <button type="submit" class="btn"><i class="fa fa-search"></i></button>
+                            </form>
+                        </div>
+                        <!-- Login Area -->
+                        <div id="uname1" class="login-area" style="display: none;">
+                            <a href="login.html"><span id="uname2">登陆</span><i class="fa fa-lock" aria-hidden="true"></i></a>
+                        </div>
+                        <div id="uname3" class="login-area" style="display: none;">
+                            <a href="#">欢迎你:&nbsp;&nbsp;&nbsp;<span id="uname4"></span> <i class="fa fa-lock" aria-hidden="true"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 导航区 -->
+    <div class="egames-main-menu" id="sticker">
+        <div class="classy-nav-container breakpoint-off">
+            <div class="container">
+                <!-- 菜单 -->
+                <nav class="classy-navbar justify-content-between" id="egamesNav">
+
+                    <!-- 导航条 -->
+                    <div class="classy-navbar-toggler">
+                        <span class="navbarToggler"><span></span><span></span><span></span></span>
+                    </div>
+
+                    <!-- 菜单 -->
+                    <div class="classy-menu">
+
+                        <!-- 关闭按钮 -->
+                        <div class="classycloseIcon">
+                            <div class="cross-wrap"><span class="top"></span><span class="bottom"></span></div>
+                        </div>
+
+                        <!-- 导航开始 -->
+                        <div class="classynav">
+                            <ul>
+                                <li><a href="index.html">主页</a></li>
+                                <li><a href="game-review.html">游戏库</a></li>
+                                <li ><a href="#">分类</a>
+                                    <ul class="dropdown">
+                                        <li ><a href="#"onclick="type1()">策略</a></li>
+                                        <li><a href="#" onclick="type2()">角色扮演</a></li>
+                                        <li><a href="#" onclick="type3()">竞速</a></li>
+                                        <li><a href="#" onclick="type4()">体育</a></li>
+                                        <li><a href="#" onclick="type5()">冒险</a></li>
+                                        <li><a href="#" onclick="type6()">休闲</a></li>
+                                    </ul>
+                                </li>
+                                <li><a href="post.html">社区</a></li>
+                                <li><a href="single-game-review.html">购物车</a></li>
+                                <li><a href="contact.html">客服</a></li>
+                            </ul>
+                        </div>
+                        <!-- Nav End -->
+                    </div>
+                </nav>
+            </div>
+        </div>
+    </div>
+</header>
+<!-- ##### Header Area End ##### -->
+
+
+<!-- ##### Breadcrumb Area End ##### -->
+
+<!-- ##### 展示区  ##### -->
+
+<div class="gaodu">
+              <table broder="2" >
+                  <tr>
+                      <th width="200" class="text-center">游戏名</th>
+                      <th width="200" class="text-center">类型</th>
+                      <th width="600" class="text-center">游戏简介</th>
+                      <th width="200" class="text-center">游戏价格</th>
+                  </tr>
+                  <tr>
+                      <td id="liebiao"></td>
+                  </tr>
+              </table>
+    <a>总价：</a><br>
+    <a href="#" font-size="40px" color="red">提交订单</a>
+    <!-- ### 分页  ### -->
+</div>
+
+
+<!-- ##### Game Review Area End ##### -->
+
+<!-- ##### Footer Area Start ##### -->
+<footer class="footer-area">
+    <!-- Main Footer Area -->
+    <div class="main-footer-area section-padding-100-0">
+        <div class="container">
+            <div class="row">
+                <!-- Single Footer Widget -->
+                <div class="col-12 col-sm-6 col-lg-3">
+                    <div class="single-footer-widget mb-70">
+                        <div class="widget-title">
+                            <a href="index.html"><img src="img/core-img/logo2.png" alt=""></a>
+                        </div>
+                        <div class="widget-content">
+                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris velit arcu, scelerisque dignissim massa quis, mattis facilisis erat. Aliquam erat volutpat. Sed efficitur diam ut interdum ultricies.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Single Footer Widget -->
+                <div class="col-12 col-sm-6 col-lg-3">
+                    <div class="single-footer-widget mb-70">
+                        <div class="widget-title">
+                            <h4>Game Reviews</h4>
+                        </div>
+                        <div class="widget-content">
+                            <nav>
+                                <ul>
+                                    <li><a href="#">Doom</a></li>
+                                    <li><a href="#">Grand Theft Auto</a></li>
+                                    <li><a href="#">Bloodborne</a></li>
+                                    <li><a href="#">God of war</a></li>
+                                    <li><a href="#">Persona 5</a></li>
+                                </ul>
+                            </nav>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Single Footer Widget -->
+                <div class="col-12 col-sm-6 col-lg-3">
+                    <div class="single-footer-widget mb-70">
+                        <div class="widget-title">
+                            <h4>Usefull Links</h4>
+                        </div>
+                        <div class="widget-content">
+                            <nav>
+                                <ul>
+                                    <li><a href="#">Testimanials</a></li>
+                                    <li><a href="#">Reviews</a></li>
+                                    <li><a href="#">New Games</a></li>
+                                    <li><a href="#">Forum</a></li>
+                                    <li><a href="#">Contact</a></li>
+                                </ul>
+                            </nav>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Single Footer Widget -->
+                <div class="col-12 col-sm-6 col-lg-3">
+                    <div class="single-footer-widget mb-70">
+                        <div class="widget-title">
+                            <h4>What’s new</h4>
+                        </div>
+                        <div class="widget-content">
+                            <nav>
+                                <ul>
+                                    <li><a href="#">Doom</a></li>
+                                    <li><a href="#">Grand Theft Auto</a></li>
+                                    <li><a href="#">Bloodborne</a></li>
+                                    <li><a href="#">God of war</a></li>
+                                    <li><a href="#">Persona 5</a></li>
+                                </ul>
+                            </nav>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Copywrite Area -->
+    <div class="copywrite-content">
+        <div class="container h-100">
+            <div class="row h-100 align-items-center">
+                <div class="col-12 col-sm-5">
+                    <!-- Copywrite Text -->
+                    <p class="copywrite-text">
+                        <a href="#">
+                            Copyright &copy;<script>document.write(new Date().getFullYear());</script> - Colorlib All rights reserved | More Templates <a href="http://www.cssmoban.com/" target="_blank" title="模板之家">模板之家</a> - Collect from <a href="http://www.cssmoban.com/" title="网页模板" target="_blank">网页模板</a>
+                        </a>
+                    </p>
+                </div>
+                <div class="col-12 col-sm-7">
+                    <!-- Footer Nav -->
+                    <div class="footer-nav">
+                        <ul>
+                            <li><a href="index.html">Home</a></li>
+                            <li><a href="game-review.html">Games</a></li>
+                            <li><a href="post.html">Articles</a></li>
+                            <li><a href="single-game-review.html">Reviews</a></li>
+                            <li><a href="contact.html">Contact</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+<!-- ##### Footer Area End ##### -->
+
+<!-- ##### All Javascript Script ##### -->
+<!-- jQuery-2.2.4 js -->
+<script src="js/jquery/jquery-2.2.4.min.js"></script>
+<!-- Popper js -->
+<script src="js/bootstrap/popper.min.js"></script>
+<!-- Bootstrap js -->
+<script src="js/bootstrap/bootstrap.min.js"></script>
+<!-- All Plugins js -->
+<script src="js/plugins/plugins.js"></script>
+<!-- Active js -->
+<script src="js/active.js"></script>
+<script src="rear_end/js/jquery.cookie.js"></script>
+
+<script>
+    $(function () {
+
+
+        $.ajax({
+            type: "GET",
+            url: "/buyGames",
+            async: false,
+            success: function (data) {
+
+                $.each(data, function (index, element) {
+                    var trStr ="<tr>\n" +
+                        "                      <th width=\"200\" class=\"text-center\">"+element.yyname+"</th>\n" +
+                        "                      <th width=\"200\" class=\"text-center\">"+element.gametype+"</th>\n" +
+                        "                      <th width=\"600\" class=\"text-center\">"+element.yyjj+"</th>\n" +
+                        "                      <th width=\"200\" class=\"text-center\">"+element.yyprice+"</th>\n" +
+                        "                  </tr>"
+
+                    $("#liebiao").append(trStr);
+                });
+            }
+        });
+    })
+
+</script>
+<script type="text/javascript">
+    // var a = window.location.search.split("=")[gametype]
+    function type1(){
+        var aa = "策略";
+        $.cookie("gametypeone",aa);
+        window.location.href="GameType.html";
+    }
+    function type2() {
+        var bb = "角色扮演";
+        $.cookie("gametypeone",bb);
+        window.location.href="GameType.html";
+    }
+    function type3() {
+        var cc = "竞速";
+        $.cookie("gametypeone",cc);
+        window.location.href="GameType.html";
+    }
+    function type4() {
+        var ee = "体育";
+        $.cookie("gametypeone",ee);
+        window.location.href="GameType.html";
+    }
+    function type5() {
+        var dd = "冒险";
+        $.cookie("gametypeone",dd);
+        window.location.href="GameType.html";
+    }
+    function type6() {
+        var ee = "休闲";
+        $.cookie("gametypeone",ee);
+        window.location.href="GameType.html";
+    }
+
+    $(function () {
+        var aa = $.cookie("uname")
+        if(aa == null){
+            document.getElementById("uname1").style.display="";//显示
+        }else {
+            document.getElementById("uname3").style.display="";//显示
+            document.getElementById("uname4").innerHTML = aa;
+
+        }
+    })
+</script>
+</body>
+
+</html>

@@ -29,4 +29,14 @@ public class YyGamesServiceImpl implements YyGamesService {
     public List<YyGames> getByName(String gametype) {
         return yyGamesMapper.getByName(gametype);
     }
+
+    @Override
+    public int getYyidByName(String yyname) {
+        return yyGamesMapper.getYyidByName(yyname);
+    }
+
+    @Override
+    public YyGames getGameByYyid(int yyid) {
+        return yyGamesMapper.getGameByYyid(yyid);
+    }
 }

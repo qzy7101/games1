@@ -3,6 +3,7 @@ package com.qf.service.impl;
 import com.qf.mapper.KeFuMapper;
 import com.qf.pojo.KeFu;
 import com.qf.service.KeFuService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -11,7 +12,7 @@ import java.util.List;
 @Service
 public class KeFuServiceImpl implements KeFuService {
 
-    @Resource
+    @Autowired
    private KeFuMapper keFuMapper;
     @Override
     public List<KeFu> getAllKeFu() {
